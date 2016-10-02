@@ -1,5 +1,6 @@
 package elements;
 
-public abstract class Operator {
+public abstract class Operator
+{
 
 }
