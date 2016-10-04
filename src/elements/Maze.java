@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
-public class maze
+public class Maze
 {
-cell [][] grid;	
+private cell [][] grid;	
 Stack<cell> stack;
-public maze(int x, int y)
+
+public cell[][] getGrid()
+{
+	return grid;
+}
+
+
+public Maze(int x, int y)
 {
 	grid  = new cell [x][y];
 	stack = new Stack<cell>();
@@ -24,12 +31,7 @@ public void init()
 			grid[j][i] =  newCell;
 		}
 	}
-	for (int i = 0; i < grid.length; i++)
-	{
-		for (int j = 0; j < grid[0].length; j++) {
-			//System.out.println(grid[j][i].coordinates[0]+ "," + grid[j][i].coordinates[1]);
-		}
-	}
+	makeMaze(0,0);
 }
 
 public void makeMaze(int x, int y)
@@ -39,14 +41,8 @@ public void makeMaze(int x, int y)
 	{
 		stack.pop();
 		cell next = stack.pop();
-		next.visited = false;
-		
-		if (!stack.isEmpty())
-		{
-			//System.out.println("Next is taken " + next.coordinates[0] + " "+ next.coordinates[1] );
-			makeMaze(next.coordinates[0], next.coordinates[1]);
-			
-		}
+		next.visited = false;		
+		if (!stack.isEmpty()) makeMaze(next.coordinates[0], next.coordinates[1]);			
 		return;
 	}
 	Cell.visited = true;
@@ -59,11 +55,8 @@ public void makeMaze(int x, int y)
 		if (!neighbourCell.visited)
 		{
 		found = true;
-		//System.out.println("Selected Cell: " + neighbourCell.coordinates[0] + " " + neighbourCell.coordinates[1]);
 		char direction = getDirection(Cell.coordinates[0], Cell.coordinates[1],
-										neighbourCell.coordinates[0], neighbourCell.coordinates[1]);
-		//System.out.println(direction);
-		
+										neighbourCell.coordinates[0], neighbourCell.coordinates[1]);		
 			if (direction == 'n') 
 			{
 				Cell.north = true;
@@ -90,9 +83,7 @@ public void makeMaze(int x, int y)
 			}
 		}
 		
-	}
-	
-	//System.out.println(x + "," + y);
+	}	
 	makeMaze(x, y); 
 	
 }
@@ -102,36 +93,31 @@ public char getDirection(int currentX, int currentY, int nx, int ny)
 	if (currentY - ny > 0) return 'n';
 	if (currentX - nx > 0) return 'w';
     return 'e';
-	
 }
 public ArrayList<cell> getNeighbours(cell Cell)
 {	
 	ArrayList<cell> neighbours = new ArrayList<cell>();
 	int x = Cell.coordinates[0];
 	int y = Cell.coordinates[1];
-	//System.out.println("Cell nummer: "+ x + " " + y);
 	if (y > 0) neighbours.add(grid[x][y - 1]); 
 	if (y < grid[0].length - 1) neighbours.add(grid[x][y + 1]); 
 	if (x > 0) neighbours.add(grid[x - 1][y]); 
 	if (x < grid[0].length - 1) neighbours.add(grid[x + 1][y]); 
-	for (int i = 0; i < neighbours.size(); i++) {
-		//System.out.println("Neighbours :" + neighbours.get(i).coordinates[0] + " " + neighbours.get(i).coordinates[1]);
-	}
 	return neighbours;
 }
 public static void main(String[] args) {
-	maze Maze = new maze(30,30);
+	Maze Maze = new Maze(30,30);
 	Maze.init();
 	Maze.makeMaze(0, 0);
 	
 	
-	for (int i = 0; i < Maze.grid.length; i++) {
+	/*for (int i = 0; i < Maze.grid.length; i++) {
 		for (int j = 0; j < Maze.grid[0].length; j++) {
 			cell Cell = Maze.grid[i][j];
 			System.out.print(Cell.coordinates[0] + " , " + Cell.coordinates[1] + ": " +Cell.north + " " + Cell.east + ' ' + Cell.south + 
 								' ' + Cell.west + " ");
 		}
 		System.out.println();
-	}
+	}*/
 }
 }
