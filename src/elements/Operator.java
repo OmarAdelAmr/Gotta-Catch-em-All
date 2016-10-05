@@ -2,7 +2,7 @@ package elements;
 
 public abstract class Operator
 {
-	public int pathCost;
+	int pathCost;
 	
 	
 	public abstract State getNextState(State state);

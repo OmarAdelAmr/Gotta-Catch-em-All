@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class SearchProblem {
-	ArrayList<Operator> operators;
-	State initialState;
-	ArrayList<State> stateSpace;
+	private ArrayList<Operator> operators;
+	private State initialState;
+	private ArrayList<State> stateSpace;
 	public abstract boolean goalTest(State state);
 	public abstract int pathCost(State state);
 	
@@ -26,10 +26,10 @@ public abstract class SearchProblem {
 		while(i.hasNext()){
 			Operator operator = i.next();
 			SearchNode nextNode = new SearchNode(
-					operator.getNextState(node.state),
+					operator.getNextState(node.getState()),
 					node,
 					operator,
-					node.depth+1,
+					node.getDepth()+1,
 					node.getPathCost()+operator.getPathCost());
 			result.add(nextNode);
 		}

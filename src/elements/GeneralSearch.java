@@ -1,6 +1,5 @@
 package elements;
 
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class GeneralSearch {
@@ -14,7 +13,7 @@ public class GeneralSearch {
 	}
 	
 	public Solution search(){
-		PriorityQueue<SearchNode> nodes = qingFun.initQueue();
+		Queue<SearchNode> nodes = qingFun.initQueue();
 		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0); //TODO
 		nodes.add(initNode);
 		

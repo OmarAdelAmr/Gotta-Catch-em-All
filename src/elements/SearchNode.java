@@ -1,15 +1,14 @@
 package elements;
 
 public class SearchNode {
-	State state;
-	SearchNode parent;
-	Operator operator;
-	int depth;
-	int pathCost;
+	private State state;
+	private SearchNode parent;
+	private Operator operator;
+	private int depth;
+	private int pathCost;
 	
 	
 	public SearchNode(State state, SearchNode parent, Operator operator, int depth, int pathCost) {
-		super();
 		this.state = state;
 		this.parent = parent;
 		this.operator = operator;

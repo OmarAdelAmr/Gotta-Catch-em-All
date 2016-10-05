@@ -1,9 +1,9 @@
 package elements;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+import java.util.Queue;
 
 public interface QingFun {
-	public PriorityQueue<SearchNode> expand(PriorityQueue<SearchNode> nodes, ArrayList<SearchNode> newNodes);
-	public PriorityQueue<SearchNode> initQueue();
+	public Queue<SearchNode> expand(Queue<SearchNode> nodes, ArrayList<SearchNode> newNodes);
+	public Queue<SearchNode> initQueue();
 }

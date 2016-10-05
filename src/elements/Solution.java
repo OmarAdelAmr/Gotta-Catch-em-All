@@ -3,7 +3,7 @@ package elements;
 import java.util.ArrayList;
 
 public class Solution {
-	boolean success;
+	private boolean success;
 	ArrayList<State> path;
 	public Solution(boolean success, ArrayList<State> path){
 		this.success = success;
@@ -21,5 +21,9 @@ public class Solution {
 	
 	public static Solution fail(){
 		return new Solution(false,null);
+	}
+	
+	public boolean isSuccess(){
+		return success;
 	}
 }
