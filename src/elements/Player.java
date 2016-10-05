@@ -1,21 +1,46 @@
 package elements;
 
+import java.util.ArrayList;
 
 public class Player {
 private int steps;
 private int [] position;
 private char direction;
+private boolean eggHatched;
+private ArrayList<String> catchedPokimons;
 
 public Player(int x, int y, char direction)
 {
 	this.steps = 0;
 	this.position = new int []{x, y};
 	this.direction = direction;
+	eggHatched = false;
+	catchedPokimons = new ArrayList<String>();
+}
+
+public void addPokimon(String pokimon)
+{
+	catchedPokimons.add(pokimon);
+}
+
+public boolean eggHatched()
+{
+	return eggHatched;
+}
+
+public void setEggHatched(boolean eggHatched)
+{
+	this.eggHatched = eggHatched;
 }
 
 public int getSteps()
 {
 	return steps;
+}
+
+public void setSteps(int steps)
+{
+	this.steps = steps;
 }
 
 public int [] getPosition()

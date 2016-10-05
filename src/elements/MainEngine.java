@@ -7,8 +7,10 @@ public class MainEngine {
 int [] gameDimensions;
 Player player;
 cell [][] grid;
-public MainEngine(int x, int y)
+int stepsNeeded;
+public MainEngine(int x, int y, int stepsNeeded)
 {
+	this.stepsNeeded = stepsNeeded;
 	gameDimensions =  new int[]{x, y};
 	Maze theMaze = new Maze (x, y);
 	theMaze.init();
@@ -48,16 +50,36 @@ public void rotateLeft()
 public void step()
 {
 	char d = player.getDirection();
-	ArrayList<cell> actions = this.getPossibleActions(player.getPosition()[0], player.getPosition()[1], d);
+	ArrayList<cell> actions = this.getPossibleActions(player.getPosition()[0], player.getPosition()[1]);
 	if (d == 'n' && actions.get(0) == null) System.out.println("Cannot go north!");
 	else if (d == 's' && actions.get(1) == null) System.out.println("Cannot go south!");
 	else if (d == 'e' && actions.get(2) == null) System.out.println("Cannot go east!");
 	else if (d == 'w' && actions.get(3) == null) System.out.println("Cannot go west!");
-	else player.step();
+	else 
+		{
+		player.step();
+		player.setSteps(player.getSteps() + 1);
+		cell PositionCell = grid[player.getPosition()[0]][player.getPosition()[1]];
+		if (PositionCell.hasPokimon())
+		{
+			player.addPokimon(PositionCell.getPokimon());
+			PositionCell.setHasPokimon(false);
+			PositionCell.setPokimon("");
+		}
+		if (!player.eggHatched())
+		{
+			stepsNeeded--;
+			if (stepsNeeded == 0)
+			{
+				System.out.println("Mabrook ksbt m3ana Pikatchu lel");
+				player.setEggHatched(true);
+			}
+		}
+		}
 }
 
 
-public ArrayList<cell> getPossibleActions(int x, int y, char d)
+public ArrayList<cell> getPossibleActions(int x, int y)
 {
 	ArrayList<cell> actions = new ArrayList<cell>();
 	cell currentCell = grid[x][y];
@@ -69,7 +91,65 @@ public ArrayList<cell> getPossibleActions(int x, int y, char d)
 	return actions;
 }
 
+public int [] calculateCost(cell source, char d)
+{
+	int [] costs = new int[4];
+	ArrayList<cell> neighbours = getPossibleActions(source.coordinates[0], source.coordinates[1]);
+	for (int i = 0; i < neighbours.size(); i++) 
+	{
+		cell tmp = neighbours.get(i);
+		if (tmp != null)
+		{
+			if (d == 'w' || d == 'e')
+				{
+					switch(i)
+					{
+						case 0: costs[0] = 1;
+						case 1: costs[0] = 2;
+						case 2: costs[0] = 1;
+						case 3: costs[0] = 2;
+					}
+				}
+			else
+				{
+					switch(i)
+					{
+						case 0: costs[0] = 2;
+						case 1: costs[0] = 1;
+						case 2: costs[0] = 2;
+						case 3: costs[0] = 1;
+					}
+				}
+		}
+	}
+	
+	return costs;
+	
+}
 
+public char changeDirectionRight(char d)
+{
+	switch(d)
+	{
+	 case 'n': return 'e'; 
+	 case 'e': return 's'; 
+	 case 's': return 'w'; 
+	 case 'w': return 'n'; 
+	}	
+	return ' ';
+}
+
+public char changeDirectionLeft(char d)
+{
+	switch(d)
+	{
+	 case 'n': return 'w'; 
+	 case 'e': return 'n'; 
+	 case 's': return 'e'; 
+	 case 'w': return 's'; 
+	}	
+	return ' ';
+}
 
 public static void main(String[] args) {
 //MainEngine z = new MainEngine(30,30);

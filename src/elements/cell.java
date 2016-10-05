@@ -6,6 +6,7 @@ boolean north, south, east, west, visited;
 int [] coordinates;
 private String pokimon;
 private boolean hasPokimon;
+private int cost;
 
 public cell (boolean n, boolean s, boolean e, boolean w, int [] c)
 {
@@ -17,10 +18,19 @@ public cell (boolean n, boolean s, boolean e, boolean w, int [] c)
 	coordinates = c;
 	hasPokimon = false;
 	pokimon = "";
+	cost = 0;
 	
 }
 
 
+public int getCost()
+{
+	return cost;
+}
+public void setCost(int cost)
+{
+	this.cost = cost;
+}
 
 public String getPokimon() {
 	return pokimon;
@@ -34,7 +44,7 @@ public void setPokimon(String pokimon) {
 
 
 
-public boolean isHasPokimon() {
+public boolean hasPokimon() {
 	return hasPokimon;
 }
 
