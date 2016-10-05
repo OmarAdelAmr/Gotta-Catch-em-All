@@ -127,6 +127,19 @@ public int [] calculateCost(cell source, char d)
 	
 }
 
+@SuppressWarnings("unchecked")
+public Pair <cell, Integer>[] actionsWithCost(int x, int y, char d)
+{
+	Pair<cell, Integer>[] actions = new Pair [4];
+	ArrayList<cell> cells = getPossibleActions(x, y);
+	int [] costs = calculateCost(grid[x][y], d);
+	for (int i = 0; i < costs.length; i++) {
+		actions[i] =  new Pair<cell, Integer>(cells.get(i), costs[i]);
+	}
+	return actions;
+}
+
+
 public char changeDirectionRight(char d)
 {
 	switch(d)
