@@ -8,6 +8,7 @@ public class Maze
 {
 private cell [][] grid;	
 Stack<cell> stack;
+private cell endPoint;
 
 public cell[][] getGrid()
 {
@@ -31,7 +32,13 @@ public void init()
 			grid[j][i] =  newCell;
 		}
 	}
+	endPoint = grid[(int) (Math.random() * grid.length)][(int) (Math.random() * grid[0].length)];
 	makeMaze(0,0);
+}
+
+public cell getEndPoint()
+{
+	return endPoint();
 }
 
 public void makeMaze(int x, int y)
