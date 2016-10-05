@@ -1,4 +1,4 @@
-package elements;
+package maze;
 
 public enum Pokimon {
 	Bulbasaur,Ivysaur,Venusaur,Charmander,Charmeleon,Charizard,Squirtle,Wartortle,Blastoise,Caterpie,Metapod,Butterfree,

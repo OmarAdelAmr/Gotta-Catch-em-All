@@ -2,13 +2,13 @@ package elements;
 
 public abstract class Operator
 {
-	int pathCost;
-	
-	
+	private int cost;
+
 	public abstract State getNextState(State state);
-	
-	public int getPathCost(){
-		return pathCost;
+
+	public int getCost()
+	{
+		return cost;
 	}
-	
+
 }

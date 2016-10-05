@@ -1,4 +1,4 @@
-package elements;
+package maze;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,6 +8,9 @@ int [] gameDimensions;
 Player player;
 cell [][] grid;
 int stepsNeeded;
+cell endPoint;
+
+// TODO all of these are supposed to be random
 public MainEngine(int x, int y, int stepsNeeded)
 {
 	this.stepsNeeded = stepsNeeded;
@@ -16,6 +19,7 @@ public MainEngine(int x, int y, int stepsNeeded)
 	theMaze.init();
 	
 	this.grid = theMaze.getGrid();
+	endPoint = theMaze.getEndPoint();
 	
 	int posX = (int) (Math.random() * x);
 	int posY = (int) (Math.random() * y);
@@ -162,6 +166,37 @@ public char changeDirectionLeft(char d)
 	 case 'w': return 's'; 
 	}	
 	return ' ';
+}
+
+
+public Player getPlayer()
+{
+	return player;
+}
+
+public ArrayList<String> getPokemons()
+{
+	ArrayList<String> result = new ArrayList<String>();
+	for (int i = 0; i < grid.length; i++) {
+		for (int j = 0; j < grid[0].length; j++)
+		{
+			if(grid[i][j].hasPokimon())
+			{
+				result.add(grid[i][j].getPokimon());
+			}
+		}
+	}
+	return result;
+}
+
+public int getStepsNeeded()
+{
+	return stepsNeeded;
+}
+
+public void setStepsNeeded(int stepsNeeded)
+{
+	this.stepsNeeded = stepsNeeded;
 }
 
 public static void main(String[] args) {

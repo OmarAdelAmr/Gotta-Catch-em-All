@@ -1,4 +1,4 @@
-package elements;
+package maze;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +38,7 @@ public void init()
 
 public cell getEndPoint()
 {
-	return endPoint();
+	return endPoint;
 }
 
 public void makeMaze(int x, int y)

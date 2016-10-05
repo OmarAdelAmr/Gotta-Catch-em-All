@@ -30,7 +30,7 @@ public abstract class SearchProblem {
 					node,
 					operator,
 					node.getDepth()+1,
-					node.getPathCost()+operator.getPathCost());
+					node.getPathCost()+operator.getCost());
 			result.add(nextNode);
 		}
 		return result;

@@ -1,4 +1,4 @@
-package elements;
+package maze;
 
 import java.util.ArrayList;
 
