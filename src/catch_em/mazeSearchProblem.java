@@ -1,5 +1,8 @@
 package catch_em;
 
+import java.util.ArrayList;
+
+import elements.Operator;
 import elements.SearchProblem;
 import elements.State;
 import maze.cell;
@@ -7,9 +10,9 @@ import maze.cell;
 public class mazeSearchProblem extends SearchProblem
 {
 
-	public mazeSearchProblem()
+	public mazeSearchProblem(ArrayList<Operator> operators, State initialState, ArrayList<State> stateSpace)
 	{
-
+		super(operators, initialState, stateSpace);
 	}
 
 	public boolean goalTest(State state, cell endPoint)
@@ -18,8 +21,8 @@ public class mazeSearchProblem extends SearchProblem
 		{
 			mazeState tempState = (mazeState) state;
 			// TODO
-			if (tempState.getPokemonsLeft().isEmpty() && tempState.getStepsLeft() == 0
-					&& tempState.getCurrentPosition() == null)
+			if (tempState.getPokemonsLeft() == 0 && tempState.getStepsLeft() == 0
+					&& tempState.getCurrentPosition() == endPoint.getCoordinates())
 			{
 				return true;
 			}
@@ -35,7 +38,7 @@ public class mazeSearchProblem extends SearchProblem
 
 	public int pathCost(State state)
 	{
-		// TODO
+		// TODO use vector in mazeState class to calculate
 		return 0;
 	}
 

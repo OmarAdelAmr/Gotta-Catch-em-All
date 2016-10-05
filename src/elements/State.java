@@ -1,5 +1,6 @@
 package elements;
 
-public abstract class State {
+public abstract class State
+{
 
 }

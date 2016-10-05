@@ -79,4 +79,17 @@ public void addPokimon()
 
 }
 
+public int[] getCoordinates()
+{
+	return coordinates;
+}
+
+
+public void setCoordinates(int[] coordinates)
+{
+	this.coordinates = coordinates;
+}
+
+
+
 }

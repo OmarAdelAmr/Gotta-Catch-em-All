@@ -1,5 +1,9 @@
 package catch_em;
 
+import java.util.ArrayList;
+
+import elements.Operator;
+import elements.State;
 import maze.MainEngine;
 
 public class catchEmAll
@@ -16,8 +20,18 @@ public class catchEmAll
 
 	public void initSearchProblem()
 	{
-		mazeState initState = new mazeState(maze_engine.getPokemons(), maze_engine.getStepsNeeded(),
+		State initState = new mazeState(maze_engine.getNumberOfPokemons(), maze_engine.getStepsNeeded(),
 				maze_engine.getPlayer().getPosition(), maze_engine.getPlayer().getDirection());
+
+		ArrayList<State> stateSpace = new ArrayList<State>();
+
+		ArrayList<Operator> operators = new ArrayList<Operator>();
+		operators.add(new mazeOperator("forward", 1));
+		operators.add(new mazeOperator("rotate left", 1));
+		operators.add(new mazeOperator("rotate right", 1));
+
+		search_problem = new mazeSearchProblem(operators, initState, stateSpace);
+
 	}
 
 	public static void main(String[] args)

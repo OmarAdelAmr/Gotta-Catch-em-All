@@ -1,19 +1,16 @@
 package catch_em;
 
-import java.util.ArrayList;
-
 import elements.State;
-import maze.cell;
 
 public class mazeState extends State
 {
-	private ArrayList<String> pokemonsLeft;
+	private int pokemonsLeft;
 	private int stepsLeft;
 	private int[] currentPosition;
 	private char direction;
 	// TODO add vector of steps
 
-	public mazeState(ArrayList<String> pokemonsLeft, int stepsLeft, int[] currentPosition, char direction)
+	public mazeState(int pokemonsLeft, int stepsLeft, int[] currentPosition, char direction)
 	{
 		this.pokemonsLeft = pokemonsLeft;
 		this.stepsLeft = stepsLeft;
@@ -21,12 +18,12 @@ public class mazeState extends State
 		this.direction = direction;
 	}
 
-	public ArrayList<String> getPokemonsLeft()
+	public int getPokemonsLeft()
 	{
 		return pokemonsLeft;
 	}
 
-	public void setPokemonsLeft(ArrayList<String> pokemonsLeft)
+	public void setPokemonsLeft(int pokemonsLeft)
 	{
 		this.pokemonsLeft = pokemonsLeft;
 	}

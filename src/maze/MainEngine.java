@@ -174,15 +174,15 @@ public Player getPlayer()
 	return player;
 }
 
-public ArrayList<String> getPokemons()
+public int getNumberOfPokemons()
 {
-	ArrayList<String> result = new ArrayList<String>();
+	int result = 0;
 	for (int i = 0; i < grid.length; i++) {
 		for (int j = 0; j < grid[0].length; j++)
 		{
 			if(grid[i][j].hasPokimon())
 			{
-				result.add(grid[i][j].getPokimon());
+				result++;
 			}
 		}
 	}
