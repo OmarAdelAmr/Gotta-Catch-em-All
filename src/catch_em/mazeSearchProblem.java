@@ -9,13 +9,16 @@ import maze.cell;
 
 public class mazeSearchProblem extends SearchProblem
 {
+	private cell endPoint;
 
-	public mazeSearchProblem(ArrayList<Operator> operators, State initialState, ArrayList<State> stateSpace)
+	public mazeSearchProblem(ArrayList<Operator> operators, State initialState, ArrayList<State> stateSpace,
+			cell endPoint)
 	{
 		super(operators, initialState, stateSpace);
+		this.endPoint = endPoint;
 	}
 
-	public boolean goalTest(State state, cell endPoint)
+	public boolean goalTest(State state)
 	{
 		if (state instanceof mazeState)
 		{
@@ -27,12 +30,6 @@ public class mazeSearchProblem extends SearchProblem
 				return true;
 			}
 		}
-		return false;
-	}
-
-	public boolean goalTest(State state)
-	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 

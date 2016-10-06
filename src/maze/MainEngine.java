@@ -199,6 +199,16 @@ public void setStepsNeeded(int stepsNeeded)
 	this.stepsNeeded = stepsNeeded;
 }
 
+public cell getEndPoint()
+{
+	return endPoint;
+}
+
+public void setEndPoint(cell endPoint)
+{
+	this.endPoint = endPoint;
+}
+
 public static void main(String[] args) {
 //MainEngine z = new MainEngine(30,30);
 

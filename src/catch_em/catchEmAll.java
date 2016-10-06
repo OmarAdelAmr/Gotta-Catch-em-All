@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import elements.Operator;
 import elements.State;
 import maze.MainEngine;
+import maze.cell;
 
 public class catchEmAll
 {
@@ -26,11 +27,12 @@ public class catchEmAll
 		ArrayList<State> stateSpace = new ArrayList<State>();
 
 		ArrayList<Operator> operators = new ArrayList<Operator>();
-		operators.add(new mazeOperator("forward", 1));
-		operators.add(new mazeOperator("rotate left", 1));
-		operators.add(new mazeOperator("rotate right", 1));
+		operators.add(new mazeOperator("step", 1));
+		operators.add(new mazeOperator("rotateRight", 1));
+		operators.add(new mazeOperator("rotateLeft", 1));
+		cell endPoint = maze_engine.getEndPoint();
 
-		search_problem = new mazeSearchProblem(operators, initState, stateSpace);
+		search_problem = new mazeSearchProblem(operators, initState, stateSpace, endPoint);
 
 	}
 
