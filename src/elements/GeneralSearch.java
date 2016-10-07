@@ -2,17 +2,14 @@ package elements;
 
 import java.util.Queue;
 
+import qingFuns.EnqueueAtEnd;
+import qingFuns.EnqueueAtFront;
+import qingFuns.OrderedInsert;
+import qingFuns.QingFun;
+
 public class GeneralSearch {
 	
-	QingFun qingFun;
-	SearchProblem searchProblem;
-	public GeneralSearch(SearchProblem searchProblem, QingFun qingFun) {
-		super();
-		this.searchProblem = searchProblem;
-		this.qingFun = qingFun;
-	}
-	
-	public Solution search(){
+	public Solution search(SearchProblem searchProblem, QingFun qingFun){
 		Queue<SearchNode> nodes = qingFun.initQueue();
 		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0); //TODO
 		nodes.add(initNode);
@@ -28,5 +25,16 @@ public class GeneralSearch {
 		return Solution.fail();
 				
 	}
+	
+	public Solution BFS(SearchProblem searchProblem){
+		return search(searchProblem,new EnqueueAtEnd());
+	}
+	public Solution DFS(SearchProblem searchProblem){
+		return search(searchProblem,new EnqueueAtFront());
+	}
+	public Solution UniformCostSearch(SearchProblem searchProblem){
+		return search(searchProblem,new OrderedInsert());
+	}
+	
 	
 }
