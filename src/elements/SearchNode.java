@@ -6,14 +6,16 @@ public class SearchNode {
 	private Operator operator;
 	private int depth;
 	private int pathCost;
+	private int predictedCost;
 	
 	
-	public SearchNode(State state, SearchNode parent, Operator operator, int depth, int pathCost) {
+	public SearchNode(State state, SearchNode parent, Operator operator, int depth, int pathCost, int predictedCost) {
 		this.state = state;
 		this.parent = parent;
 		this.operator = operator;
 		this.depth = depth;
 		this.pathCost = pathCost;
+		this.predictedCost = predictedCost;
 	}
 	
 	public State getState() {
@@ -30,6 +32,9 @@ public class SearchNode {
 	}
 	public int getPathCost() {
 		return pathCost;
+	}
+	public int getPredictedCost(){
+		return predictedCost;
 	}
 	
 }

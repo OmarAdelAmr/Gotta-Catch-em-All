@@ -43,7 +43,7 @@ public abstract class SearchProblem
 		{
 			Operator operator = i.next();
 			SearchNode nextNode = new SearchNode(operator.getNextState(node.getState()), node, operator,
-					node.getDepth() + 1, node.getPathCost() + operator.getCost());
+					node.getDepth() + 1, node.getPathCost() + operator.getCost(),0);//TODO the hueristic function
 			result.add(nextNode);
 		}
 		return result;

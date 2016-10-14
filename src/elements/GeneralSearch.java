@@ -1,6 +1,7 @@
 package elements;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Queue;
 
@@ -13,7 +14,7 @@ public class GeneralSearch {
 	
 	public Solution search(SearchProblem searchProblem, QingFun qingFun){
 		Queue<SearchNode> nodes = qingFun.initQueue();
-		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0); //TODO
+		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0,0); //TODO
 		nodes.add(initNode);
 		
 		while(!nodes.isEmpty()){
@@ -30,7 +31,7 @@ public class GeneralSearch {
 	
 	public Solution depthLimitedSearch(SearchProblem searchProblem, QingFun qingFun, int depth) {
 		Queue<SearchNode> nodes = qingFun.initQueue();
-		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0); //TODO
+		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0, 0); //TODO
 		nodes.add(initNode);
 		
 		while(!nodes.isEmpty()){
@@ -78,5 +79,31 @@ public class GeneralSearch {
 		}
 	}
 	
+	private Solution BestFirstSearch(SearchProblem searchProblem, Comparator<SearchNode> EvalFun){
+		return search(searchProblem,new OrderedInsert(EvalFun));
+	}
 	
+	public Solution greedySearch(SearchProblem searchProblem){
+		Comparator<SearchNode> EvalFun = new Comparator<SearchNode>() {
+
+			@Override
+			public int compare(SearchNode n1, SearchNode n2) {
+				return n1.getPredictedCost()-n2.getPredictedCost();
+			}
+			
+		};
+		return BestFirstSearch(searchProblem, EvalFun);
+	}
+	
+	public Solution AStarSearch(SearchProblem searchProblem){
+		Comparator<SearchNode> EvalFun = new Comparator<SearchNode>() {
+
+			@Override
+			public int compare(SearchNode n1, SearchNode n2) {
+				return (n1.getPredictedCost()+n1.getPathCost())-(n2.getPredictedCost()+n1.getPathCost());
+			}
+			
+		};
+		return BestFirstSearch(searchProblem, EvalFun);
+	}
 }

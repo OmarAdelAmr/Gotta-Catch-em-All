@@ -8,16 +8,27 @@ import java.util.Queue;
 import elements.SearchNode;
 
 public class OrderedInsert implements QingFun {
-
-	@Override
-	public Queue<SearchNode> initQueue() {
-
-		return new PriorityQueue<SearchNode>(new Comparator<SearchNode>() {
+	private Comparator<SearchNode> comparator;
+	
+	
+	
+	public OrderedInsert(Comparator<SearchNode> comparator) {
+		this.comparator = comparator;
+	}
+	
+	public OrderedInsert(){
+		this(new Comparator<SearchNode>() {
 			@Override
 			public int compare(SearchNode n1, SearchNode n2) {
 				return n1.getPathCost() - n2.getPathCost();
 			}
 		});
+	}
+
+	@Override
+	public Queue<SearchNode> initQueue() {
+
+		return new PriorityQueue<SearchNode>(comparator);
 	}
 	
 	@Override
