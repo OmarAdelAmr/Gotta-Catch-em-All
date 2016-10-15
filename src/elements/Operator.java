@@ -2,14 +2,14 @@ package elements;
 
 public abstract class Operator
 {
-	private int cost;
-
-	public abstract State getNextState(State state);
-
+	protected int cost;
+	
 	public Operator(int cost)
 	{
 		this.cost = cost;
 	}
+	
+	public abstract State getNextState(State state);
 
 	public int getCost()
 	{

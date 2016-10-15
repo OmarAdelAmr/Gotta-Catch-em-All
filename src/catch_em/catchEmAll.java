@@ -27,9 +27,10 @@ public class catchEmAll
 		ArrayList<State> stateSpace = new ArrayList<State>();
 
 		ArrayList<Operator> operators = new ArrayList<Operator>();
-		operators.add(new mazeOperator("step", 1));
-		operators.add(new mazeOperator("rotateRight", 1));
-		operators.add(new mazeOperator("rotateLeft", 1));
+		operators.add(new MoveForwardOperator(1));
+		operators.add(new MoveLeftOperator(2));
+		operators.add(new MoveRightOperator(2));
+		operators.add(new MoveBackwardOperator(3));
 		cell endPoint = maze_engine.getEndPoint();
 
 		search_problem = new mazeSearchProblem(operators, initState, stateSpace, endPoint);
