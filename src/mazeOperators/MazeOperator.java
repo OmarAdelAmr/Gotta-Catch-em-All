@@ -1,5 +1,6 @@
-package catch_em;
+package mazeOperators;
 
+import catch_em.mazeState;
 import elements.Operator;
 import elements.State;
 import maze.MainEngine;

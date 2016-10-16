@@ -2,6 +2,7 @@ package catch_em;
 
 import java.util.ArrayList;
 
+import elements.HeuristicFun;
 import elements.Operator;
 import elements.SearchProblem;
 import elements.State;
@@ -12,9 +13,9 @@ public class mazeSearchProblem extends SearchProblem
 	private cell endPoint;
 
 	public mazeSearchProblem(ArrayList<Operator> operators, State initialState, ArrayList<State> stateSpace,
-			cell endPoint)
+			cell endPoint,HeuristicFun hueristicFun)
 	{
-		super(operators, initialState, stateSpace);
+		super(operators, initialState, stateSpace,hueristicFun);
 		this.endPoint = endPoint;
 	}
 

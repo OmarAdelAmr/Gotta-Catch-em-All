@@ -6,6 +6,10 @@ import elements.Operator;
 import elements.State;
 import maze.MainEngine;
 import maze.cell;
+import mazeOperators.MoveBackwardOperator;
+import mazeOperators.MoveForwardOperator;
+import mazeOperators.MoveLeftOperator;
+import mazeOperators.MoveRightOperator;
 
 public class catchEmAll
 {
@@ -27,13 +31,13 @@ public class catchEmAll
 		ArrayList<State> stateSpace = new ArrayList<State>();
 
 		ArrayList<Operator> operators = new ArrayList<Operator>();
-		operators.add(new MoveForwardOperator(1));
-		operators.add(new MoveLeftOperator(2));
-		operators.add(new MoveRightOperator(2));
-		operators.add(new MoveBackwardOperator(3));
+		operators.add(new MoveForwardOperator(1, maze_engine));
+		operators.add(new MoveLeftOperator(2, maze_engine));
+		operators.add(new MoveRightOperator(2, maze_engine));
+		operators.add(new MoveBackwardOperator(3, maze_engine));
 		cell endPoint = maze_engine.getEndPoint();
 
-		search_problem = new mazeSearchProblem(operators, initState, stateSpace, endPoint);
+		search_problem = new mazeSearchProblem(operators, initState, stateSpace, endPoint,null); //TODO hueristic function
 
 	}
 

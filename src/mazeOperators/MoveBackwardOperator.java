@@ -1,32 +1,32 @@
-package catch_em;
+package mazeOperators;
 
+import catch_em.mazeState;
 import elements.State;
 import maze.MainEngine;
 import maze.cell;
 
-public class MoveRightOperator extends MazeOperator {
-	public MoveRightOperator(int cost,MainEngine engine) {
+public class MoveBackwardOperator extends MazeOperator {
+	public MoveBackwardOperator(int cost, MainEngine engine) {
 		super(cost,engine);
 	}
 
 	@Override
 	public State getNextState(State state) {
 		mazeState temp = (mazeState) state;
-		cell nextCell =  getEngine().moveRight(temp.getCurrentPosition(),temp.getDirection());
+		cell nextCell =  getEngine().moveBackward(temp.getCurrentPosition(),temp.getDirection());
 		int pokimonsLeft = getPokimonsLeft(temp, nextCell);
 		int stepsLeft = getStepsLeft(temp);
 		char d = getNextDirection(temp.getDirection());
 		return new mazeState(pokimonsLeft,stepsLeft,nextCell.getCoordinates(),d);
 	}
-
-	@Override
-	public char getNextDirection(char d) {
+	
+	public char getNextDirection(char d){
 		switch(d){
-		case 'n': return 'e';
-		case 's': return 'w';
-		case 'e': return 's';
-		case 'w': return 'n';
-		default : return ' ';
+		case 'n' : 	return 's';
+		case 's' :	return 'n';
+		case 'e' :	return 'w';
+		case 'w' :	return 'e';
+		default: return ' ';
 		}
 	}
 }
