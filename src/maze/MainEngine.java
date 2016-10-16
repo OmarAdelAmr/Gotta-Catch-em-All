@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import catch_em.mazeState;
+import elements.State;
 
 public class MainEngine {
 	int [] gameDimensions;
@@ -95,6 +96,91 @@ public class MainEngine {
 		actions.add(grid[x][y].west?grid[currentCell.getNeighbour(x, y, 'w')[0]][currentCell.getNeighbour(x, y, 'w')[1]]:null);
 	
 		return actions;
+	}
+	
+	public cell moveForward(int[] currentPosition, char d){
+		int x = currentPosition[0];
+		int y = currentPosition[1];
+		cell currentCell = grid[x][y];
+		cell nextPosition;
+		switch(d){
+		case 'n': 	nextPosition = grid[x][y].north?grid[currentCell.getNeighbour(x, y, 'n')[0]][currentCell.getNeighbour(x, y, 'n')[1]]:null;
+					break;
+		case 's':	nextPosition = grid[x][y].south?grid[currentCell.getNeighbour(x, y, 's')[0]][currentCell.getNeighbour(x, y, 's')[1]]:null;
+					break;
+		case 'e':	nextPosition = grid[x][y].east?grid[currentCell.getNeighbour(x, y, 'e')[0]][currentCell.getNeighbour(x, y, 'e')[1]]:null;
+					break;
+		case 'w':	nextPosition = grid[x][y].west?grid[currentCell.getNeighbour(x, y, 'w')[0]][currentCell.getNeighbour(x, y, 'w')[1]]:null;
+					break;
+		default: nextPosition = null;
+			
+		}
+		
+		return nextPosition;
+		
+	}
+	
+	public cell moveBackward(int[] currentPosition, char d){
+		int x = currentPosition[0];
+		int y = currentPosition[1];
+		cell currentCell = grid[x][y];
+		cell nextPosition;
+		switch(d){
+		case 'n': 	nextPosition = grid[x][y].south?grid[currentCell.getNeighbour(x, y, 's')[0]][currentCell.getNeighbour(x, y, 's')[1]]:null;
+					break;
+		case 's':	nextPosition = grid[x][y].north?grid[currentCell.getNeighbour(x, y, 'n')[0]][currentCell.getNeighbour(x, y, 'n')[1]]:null;
+					break;
+		case 'e':	nextPosition = grid[x][y].west?grid[currentCell.getNeighbour(x, y, 'w')[0]][currentCell.getNeighbour(x, y, 'w')[1]]:null;
+					break;
+		case 'w':	nextPosition = grid[x][y].east?grid[currentCell.getNeighbour(x, y, 'e')[0]][currentCell.getNeighbour(x, y, 'e')[1]]:null;
+					break;
+		default: nextPosition = null;
+			
+		}
+		
+		return nextPosition;
+	}
+	
+	public cell moveLeft(int[] currentPosition, char d){
+		int x = currentPosition[0];
+		int y = currentPosition[1];
+		cell currentCell = grid[x][y];
+		cell nextPosition;
+		switch(d){
+		case 'n': 	nextPosition = grid[x][y].west?grid[currentCell.getNeighbour(x, y, 'w')[0]][currentCell.getNeighbour(x, y, 'w')[1]]:null;
+					break;
+		case 's':	nextPosition = grid[x][y].east?grid[currentCell.getNeighbour(x, y, 'e')[0]][currentCell.getNeighbour(x, y, 'e')[1]]:null;
+					break;
+		case 'e':	nextPosition = grid[x][y].north?grid[currentCell.getNeighbour(x, y, 'n')[0]][currentCell.getNeighbour(x, y, 'n')[1]]:null;
+					break;
+		case 'w':	nextPosition = grid[x][y].south?grid[currentCell.getNeighbour(x, y, 's')[0]][currentCell.getNeighbour(x, y, 's')[1]]:null;
+					break;
+		default: nextPosition = null;
+			
+		}
+		
+		return nextPosition;
+	}
+	
+	public cell moveRight(int[] currentPosition, char d){
+		int x = currentPosition[0];
+		int y = currentPosition[1];
+		cell currentCell = grid[x][y];
+		cell nextPosition;
+		switch(d){
+		case 'n': 	nextPosition = grid[x][y].east?grid[currentCell.getNeighbour(x, y, 'e')[0]][currentCell.getNeighbour(x, y, 'e')[1]]:null;
+					break;
+		case 's':	nextPosition = grid[x][y].west?grid[currentCell.getNeighbour(x, y, 'w')[0]][currentCell.getNeighbour(x, y, 'w')[1]]:null;
+					break;
+		case 'e':	nextPosition = grid[x][y].south?grid[currentCell.getNeighbour(x, y, 's')[0]][currentCell.getNeighbour(x, y, 's')[1]]:null;
+					break;
+		case 'w':	nextPosition = grid[x][y].north?grid[currentCell.getNeighbour(x, y, 'n')[0]][currentCell.getNeighbour(x, y, 'n')[1]]:null;
+					break;
+		default: nextPosition = null;
+			
+		}
+		
+		return nextPosition;
 	}
 	
 	public int [] calculateCost(cell source, char d)
@@ -251,6 +337,9 @@ public class MainEngine {
 	//MainEngine z = new MainEngine(30,30);
 	
 	}
+
+
+
 
 }
 
