@@ -265,7 +265,7 @@ public class MainEngine {
 	
 	public void queryCell(mazeState state)
 	{
-		System.out.println("U LOK LEIK AN FAGIT LEL");
+		System.out.println("3el2 ¯\\_(ツ)_//¯");
 	}
 	
 	public char changeDirectionRight(char d)

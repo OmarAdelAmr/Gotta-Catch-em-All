@@ -2,32 +2,40 @@ package catch_em;
 
 import elements.Operator;
 import elements.State;
+import maze.MainEngine;
+import maze.cell;
 
-public class mazeOperator extends Operator
+public abstract class MazeOperator extends Operator
 {
-
-	private String operator;
-
-	public mazeOperator(String operator, int cost)
-	{
+	protected MainEngine engine;
+	public MazeOperator(int cost,MainEngine engine){
 		super(cost);
-		this.operator = operator;
+		this.engine = engine;
 	}
 
-	public State getNextState(State state)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract State getNextState(State state);
 
-	public String getOperator()
-	{
-		return operator;
+	public MainEngine getEngine(){
+		return engine;
 	}
-
-	public void setOperator(String operator)
-	{
-		this.operator = operator;
+	
+	public int getPokimonsLeft(mazeState state, cell nextCell){
+		int pokimonsLeft = state.getPokemonsLeft();
+		if(nextCell.hasPokimon()){
+			pokimonsLeft--;
+		}
+		return pokimonsLeft;
 	}
+	
+	public int getStepsLeft(mazeState state){
+		int stepsLeft = state.getStepsLeft();
+		stepsLeft -= getCost();
+		if(stepsLeft < 0)
+			stepsLeft = 0;
+		return stepsLeft;
+	}
+	
+	public abstract char getNextDirection(char d);
+	
 
 }
