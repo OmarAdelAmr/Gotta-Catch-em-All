@@ -22,8 +22,9 @@ public class MainEngine
 		this.stepsNeeded = (int) (5 + (Math.random() *(x * y - 4)));
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
-		System.out.println(x + " , " + y);
+		
 		theMaze.init();
+		
 		this.grid = theMaze.getGrid();	
 		
 		for (int i = 0; i < grid.length; i++) {
@@ -75,7 +76,19 @@ public class MainEngine
 			}
 			mazeVisualizer.add("+");
 			mazeVisualizer.add("\n");
-			for (int j = 0; j < height; j++) mazeVisualizer.add(this.grid[j][i].west? "   ":"│  ");
+			for (int j = 0; j < height; j++) 
+				{
+				mazeVisualizer.add(this.grid[j][i].west? " ":"│");
+				if (this.grid[j][i].hasPokimon())
+				{
+					mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + " ");	
+				}
+				else
+				{
+					mazeVisualizer.add("  ");
+				}
+				}
+			
 			mazeVisualizer.add("│");		
 			mazeVisualizer.add("\n");
 		}

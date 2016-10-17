@@ -7,20 +7,33 @@ import java.util.Stack;
 public class Maze
 {
 	private cell [][] grid;	
-	Stack<cell> stack;
+	private Stack<cell> stack;
 	private cell endPoint;
+	private int numberOfPokimons;
+
+	
+	public Maze(int x, int y)
+	{
+		grid  = new cell [x][y];
+		stack = new Stack<cell>();
+		numberOfPokimons = 0;
+	}
 	
 	public cell[][] getGrid()
 	{
 		return grid;
 	}
 	
-	
-	public Maze(int x, int y)
+	public int getNumberOfPokimons()
 	{
-		grid  = new cell [x][y];
-		stack = new Stack<cell>();
+		return numberOfPokimons;
 	}
+	
+	public void setNumberOfPokimons(int n)
+	{
+		this.numberOfPokimons = n;
+	}
+	
 	
 	public void init()
 	{
@@ -29,6 +42,7 @@ public class Maze
 			{
 				int [] index = {i, j};
 				cell newCell = new cell(false, false, false, false, index);
+				this.numberOfPokimons = newCell.hasPokimon()? numberOfPokimons+=1: numberOfPokimons;
 				grid[i][j] =  newCell;
 			}
 		}
@@ -131,25 +145,7 @@ public class Maze
 	public static void main(String[] args) {
 		Maze Maze = new Maze(4,3);
 		Maze.init();
-		//Maze.makeMaze(0, 0);
-		
-		
-		for (int i = 0; i < Maze.grid.length; i++) {
-			for (int j = 0; j < Maze.grid[0].length; j++) {
-				cell Cell = Maze.grid[j][i];
-				System.out.print(Cell.coordinates[0] + " , " + Cell.coordinates[1] + ": " +Cell.north + " " + Cell.east + ' ' + Cell.south + 
-									' ' + Cell.west + " ");
-			}
-			
-			System.out.println();
-		}
-		cell[][] g = Maze.getGrid();
-		ArrayList<cell> tmp = Maze.getNeighbours(g[3][2]);
-	//	System.out.println(Maze.getDirection(g[2][0].coordinates[0], g[2][0].coordinates[1],
-				//tmp.get(0).coordinates[0], tmp.get(0).coordinates[1]));
-		for (int i = 0; i < tmp.size(); i++) {
-			//System.out.println(tmp.get(i).coordinates[0] + " , " + tmp.get(i).coordinates[1]);
-		}
+		System.out.println(Maze.getNumberOfPokimons());
 		
 	
 	}

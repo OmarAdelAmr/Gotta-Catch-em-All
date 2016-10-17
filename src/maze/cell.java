@@ -19,6 +19,7 @@ public class cell {
 		hasPokimon = false;
 		pokimon = "";
 		cost = 0;
+		this.addPokimon();
 		
 	}
 	
@@ -75,6 +76,7 @@ public class cell {
 		{
 		 hasPokimon = true;
 		 this.pokimon = Pokimon.getRandom().name();
+		 System.out.println(this.pokimon);
 		}
 	
 	}
