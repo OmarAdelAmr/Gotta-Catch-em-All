@@ -359,33 +359,33 @@ public class MainEngine
 	}
 	
 	
-		@SuppressWarnings("unchecked")
-		public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
-		{
-			int x = state.getCurrentPosition()[0];
-			int y = state.getCurrentPosition()[1];
-			char d = state.getDirection();
-			int pokimons = state.getPokemonsLeft();
-			Pair<mazeState, Integer>[] actions = new Pair [4];
-			ArrayList<cell> cells = getPossibleActions(x, y);
-			int [] costs = calculateCost(grid[x][y], d);
-			for (int i = 0; i < costs.length; i++)
-			{
-				if (cells.get(i) != null)
-				{
-					if (cells.get(i).hasPokimon())
-					{
-						int [] newPosition = cells.get(i).coordinates;
-						int newPokimonsLeft = pokimons--;
-						mazeState tmp = new mazeState(newPokimonsLeft, state.getStepsLeft() - 1, 
-														newPosition, getDirection(i));
-						actions[i] =  new Pair<mazeState, Integer>(tmp, costs[i]);
-					}
-	
-				}
-			}
-			return actions;
-		}
+//		@SuppressWarnings("unchecked")
+//		public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
+//		{
+//			int x = state.getCurrentPosition()[0];
+//			int y = state.getCurrentPosition()[1];
+//			char d = state.getDirection();
+//			int pokimons = state.getPokemonsLeft();
+//			Pair<mazeState, Integer>[] actions = new Pair [4];
+//			ArrayList<cell> cells = getPossibleActions(x, y);
+//			int [] costs = calculateCost(grid[x][y], d);
+//			for (int i = 0; i < costs.length; i++)
+//			{
+//				if (cells.get(i) != null)
+//				{
+//					if (cells.get(i).hasPokimon())
+//					{
+//						int [] newPosition = cells.get(i).coordinates;
+//						int newPokimonsLeft = pokimons--;
+//						mazeState tmp = new mazeState(newPokimonsLeft, state.getStepsLeft() - 1, 
+//														newPosition, getDirection(i));
+//						actions[i] =  new Pair<mazeState, Integer>(tmp, costs[i]);
+//					}
+//	
+//				}
+//			}
+//			return actions;
+//		}
 		
 		public char getDirection(int i)
 		{
