@@ -217,6 +217,12 @@ public class MainEngine
 		return actions;
 	}
 	
+	public int estimateCost(int [] source)
+	{
+		return Math.abs(source[0] - this.endPoint.coordinates[0] ) 
+				+ Math.abs(source[1] - this.endPoint.coordinates[1]);
+	}
+	
 	public cell moveForward(int[] currentPosition, char d){
 		int x = currentPosition[0];
 		int y = currentPosition[1];
@@ -452,6 +458,7 @@ public class MainEngine
 	MainEngine z = new MainEngine();
 	
 	System.out.println(z.endPoint.coordinates[0] + " , " + z.endPoint.coordinates[1]);
+	System.out.println(z.estimateCost(new int [] {0,0}));
 	/*for (int i = 0; i < 30; i++) {
 		for (int j = 0; j < 30; j++) {
 			System.out.print(i + " , " + j+": " +z.grid[i][j].north + "," +z.grid[i][j].south+"," +z.grid[i][j].east + "," +z.grid[i][j].west +",");
