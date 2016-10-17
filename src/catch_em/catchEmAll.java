@@ -19,7 +19,7 @@ public class catchEmAll
 
 	public catchEmAll()
 	{
-		maze_engine = new MainEngine(10, 10, 2);
+		maze_engine = new MainEngine();
 		initSearchProblem();
 	}
 

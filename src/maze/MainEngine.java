@@ -6,7 +6,8 @@ import java.util.Random;
 import catch_em.mazeState;
 import elements.State;
 
-public class MainEngine {
+public class MainEngine 
+{
 	int [] gameDimensions;
 	Player player;
 	cell [][] grid;
@@ -14,22 +15,38 @@ public class MainEngine {
 	cell endPoint;
 	
 	// TODO all of these are supposed to be random
-	public MainEngine(int x, int y, int stepsNeeded)
+	public MainEngine()
 	{
-		this.stepsNeeded = stepsNeeded;
-		gameDimensions =  new int[]{x, y};
+		int x = (int) (5 + Math.random() * 25);
+		int y = (int) (5 + Math.random() * 25);
+		this.stepsNeeded = (int) (5 + (Math.random() *(x * y - 4)));
+		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
+		System.out.println(x + " , " + y);
 		theMaze.init();
+		this.grid = theMaze.getGrid();	
 		
-		this.grid = theMaze.getGrid();
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				cell Cell = grid[i][j];
+				System.out.print(Cell.coordinates[0] + " , " + Cell.coordinates[1] + ": " +Cell.north + " " + Cell.east + ' ' + Cell.south + 
+									' ' + Cell.west + " ");
+			}
+			
+			System.out.println();
+		}
+		
+		
+		
+		
 		endPoint = theMaze.getEndPoint();
-		
 		int posX = (int) (Math.random() * x);
 		int posY = (int) (Math.random() * y);
 		
 		boolean found = false;
 		char directorC = ' ';
-		while(!found) {
+		while(!found) 
+		{
 			Random rand = new Random();
 			int director = rand.nextInt(19) + 101;
 			if (director % 110 == 0||director % 101 == 0||
@@ -40,6 +57,39 @@ public class MainEngine {
 				this.player = new Player (posX, posY, directorC);
 				}
 		}
+		visualize();
+	}
+	
+	public ArrayList<String> visualize()
+	{
+		ArrayList <String>mazeVisualizer = new ArrayList<String>();
+		int height = this.grid.length; 
+		int width = this.grid[0].length;
+		for (int i = 0; i < width; i++) 
+		{
+			for (int j = 0; j < height; j++)
+			{
+				
+				mazeVisualizer.add("+");
+				mazeVisualizer.add(this.grid[j][i].north?"  ":"──");
+			}
+			mazeVisualizer.add("+");
+			mazeVisualizer.add("\n");
+			for (int j = 0; j < height; j++) mazeVisualizer.add(this.grid[j][i].west? "   ":"│  ");
+			mazeVisualizer.add("│");		
+			mazeVisualizer.add("\n");
+		}
+		
+		for (int i = 0; i < height; i++) 
+		{
+			mazeVisualizer.add("+");
+			mazeVisualizer.add("──");
+		}
+		mazeVisualizer.add("+");
+		for (int i = 0; i < mazeVisualizer.size(); i++) {
+			System.out.print(mazeVisualizer.get(i));
+		}
+		return mazeVisualizer;
 	}
 	
 	//control function
@@ -265,7 +315,7 @@ public class MainEngine {
 	
 	public void queryCell(mazeState state)
 	{
-		System.out.println("3el2 ¯\\_(ツ)_//¯");
+		System.out.println("3el2 Â¯\\_(ãƒ„)_//Â¯");
 	}
 	
 	public char changeDirectionRight(char d)
@@ -334,7 +384,29 @@ public class MainEngine {
 	}
 	
 	public static void main(String[] args) {
-	//MainEngine z = new MainEngine(30,30);
+	MainEngine z = new MainEngine();
+	
+	
+	/*for (int i = 0; i < 30; i++) {
+		for (int j = 0; j < 30; j++) {
+			System.out.print(i + " , " + j+": " +z.grid[i][j].north + "," +z.grid[i][j].south+"," +z.grid[i][j].east + "," +z.grid[i][j].west +",");
+			
+		}
+		System.out.println();
+	}*/
+	
+		/*for (int j = 0; j < z.grid.length; j++) 
+		{
+			
+			for (int j2 = 0; j2 < z.grid[0].length; j2++) {
+				System.out.print("+──");
+			}
+			System.out.println();
+			for (int j2 = 0; j2 < z.grid[0].length; j2++) {
+				System.out.print("\u2502  ");
+			}
+			System.out.println();
+		}*/
 	
 	}
 
