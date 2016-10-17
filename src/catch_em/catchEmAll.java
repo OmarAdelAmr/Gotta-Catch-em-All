@@ -26,7 +26,7 @@ public class catchEmAll
 	public void initSearchProblem()
 	{
 		State initState = new mazeState(maze_engine.getNumberOfPokemons(), maze_engine.getStepsNeeded(),
-				maze_engine.getPlayer().getPosition(), maze_engine.getPlayer().getDirection());
+				maze_engine.getPlayer().getPosition(), maze_engine.getPlayer().getDirection(), maze_engine.getPokimonStates());
 
 		ArrayList<State> stateSpace = new ArrayList<State>();
 

@@ -21,11 +21,23 @@ public abstract class MazeOperator extends Operator
 	}
 	
 	public int getPokimonsLeft(mazeState state, cell nextCell){
-		int pokimonsLeft = state.getPokemonsLeft();
-		if(nextCell.hasPokimon()){
-			pokimonsLeft--;
+		boolean[][] pokimons = state.getPokemons();
+		int x = nextCell.getCoordinates()[0];
+		int y = nextCell.getCoordinates()[1];
+		if(pokimons[x][y]){
+			return state.getPokemonsLeft()-1;
 		}
-		return pokimonsLeft;
+		return state.getPokemonsLeft();
+	}
+	
+	public boolean[][] getPokimons(mazeState state, cell nextCell){
+		boolean[][] pokimons = state.getPokemons().clone();
+		int x = nextCell.getCoordinates()[0];
+		int y = nextCell.getCoordinates()[1];
+		if(pokimons[x][y]){
+			pokimons[x][y] = false;
+		}
+		return pokimons;
 	}
 	
 	public int getStepsLeft(mazeState state){

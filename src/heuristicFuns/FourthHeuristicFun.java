@@ -17,9 +17,6 @@ public class FourthHeuristicFun extends MazeHeuristicFun implements HeuristicFun
 	public int getHeuristicCost(State state)
 	{
 		mazeState tempState = (mazeState) state;
-		int remainingPokemons = tempState.getPokemonsLeft();
-		int[] statePosition = tempState.getCurrentPosition();
-		// TODO RETURN NUMBER OF TRUE VALUES IN POKEMONS'STATES ARRAY
-		return remainingPokemons;
+		return tempState.getPokemonsLeft();
 	}
 }
