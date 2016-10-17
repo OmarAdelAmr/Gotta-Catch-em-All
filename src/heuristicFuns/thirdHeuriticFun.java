@@ -24,9 +24,8 @@ public class thirdHeuriticFun extends MazeHeuristicFun implements HeuristicFun
 			int endPointDistance = getEngine().estimateCost(tempState.getCurrentPosition());
 			return endPointDistance;
 		}
-		// TODO WAITING FOR MOAAZ ===> nearstPokemon();
-		int distanceToNearestPokemon = 0;
-		/////////////// END TODO /////////////////
+		// TODO REPLACE NULL WITH 2D ARRAY OF POKEMONS' STATES
+		int distanceToNearestPokemon = getEngine().nearestPokimon(tempState.getCurrentPosition(), null);
 		return distanceToNearestPokemon;
 	}
 

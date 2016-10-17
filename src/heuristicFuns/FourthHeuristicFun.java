@@ -19,7 +19,7 @@ public class FourthHeuristicFun extends MazeHeuristicFun implements HeuristicFun
 		mazeState tempState = (mazeState) state;
 		int remainingPokemons = tempState.getPokemonsLeft();
 		int[] statePosition = tempState.getCurrentPosition();
-		// TODO Waiting for Moaaz ==> to get if it has pokemon or not
+		// TODO RETURN NUMBER OF TRUE VALUES IN POKEMONS'STATES ARRAY
 		return remainingPokemons;
 	}
 }

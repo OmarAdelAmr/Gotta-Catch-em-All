@@ -3,7 +3,6 @@ package maze;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import catch_em.mazeState;
 
