@@ -24,7 +24,6 @@ public class mazeSearchProblem extends SearchProblem
 		if (state instanceof mazeState)
 		{
 			mazeState tempState = (mazeState) state;
-			// TODO
 			if (tempState.getPokemonsLeft() == 0 && tempState.getStepsLeft() == 0
 					&& tempState.getCurrentPosition() == endPoint.getCoordinates())
 			{
