@@ -57,8 +57,10 @@ public class MainEngine
 				found = !found;
 				directorC = (char) director;
 				this.player = new Player (posX, posY, directorC);
+				
 				}
 		}
+		System.out.println(this.player.getPosition()[0] + " , " + this.player.getPosition()[1]);
 		visualize();
 	}
 	
@@ -67,37 +69,74 @@ public class MainEngine
 		ArrayList <String>mazeVisualizer = new ArrayList<String>();
 		int height = this.grid.length; 
 		int width = this.grid[0].length;
+		String playerDirection = "";
+		boolean hasThePlayer = false;
+		 switch (this.player.getDirection())
+		{
+		case 'n': playerDirection = "\u2191"; break;
+		case 's': playerDirection = "\u2193"; break;
+		case 'e': playerDirection = "\u2192"; break;
+		case 'w': playerDirection = "\u2190"; break;
+		}
 		for (int i = 0; i < width; i++) 
 		{
 			for (int j = 0; j < height; j++)
 			{
 				
 				mazeVisualizer.add("+");
-				mazeVisualizer.add(this.grid[j][i].north?"  ":"──");
+				mazeVisualizer.add(this.grid[j][i].north?"  ":"\u2500\u2500");
 			}
 			mazeVisualizer.add("+");
 			mazeVisualizer.add("\n");
 			for (int j = 0; j < height; j++) 
 				{
-				mazeVisualizer.add(this.grid[j][i].west? " ":"│");
+				mazeVisualizer.add(this.grid[j][i].west? " ":"\u2502");
+				if (this.grid[j][i].coordinates[0] == this.player.getPosition()[0] &&
+						this.grid[j][i].coordinates[1] == this.player.getPosition()[1])
+				{	
+					hasThePlayer = true;
+				}
 				if (this.grid[j][i].hasPokimon())
 				{
-					mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + " ");	
+					
+					mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + "");	
+					if (hasThePlayer)
+					{	
+					mazeVisualizer.add(playerDirection);
+					System.out.println("Player added ");
+					hasThePlayer = false;
+					}
+					
+					else mazeVisualizer.add(" ");
+						
+					
 				}
 				else
 				{
-					mazeVisualizer.add("  ");
+					if (hasThePlayer)
+					{
+						mazeVisualizer.add(playerDirection + " ");
+						System.out.println("Player added ");
+
+						hasThePlayer = false;
+					}
+					else
+						{
+						mazeVisualizer.add("  ");
+						}
+					
 				}
+				
 				}
 			
-			mazeVisualizer.add("│");		
+			mazeVisualizer.add("\u2502");		
 			mazeVisualizer.add("\n");
 		}
 		
 		for (int i = 0; i < height; i++) 
 		{
 			mazeVisualizer.add("+");
-			mazeVisualizer.add("──");
+			mazeVisualizer.add("\u2500\u2500");
 		}
 		mazeVisualizer.add("+");
 		for (int i = 0; i < mazeVisualizer.size(); i++) {
