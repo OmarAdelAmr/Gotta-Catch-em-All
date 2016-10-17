@@ -117,9 +117,9 @@ public class catchEmAll
 
 	public static void main(String[] args)
 	{
-		// new catchEmAll();
-		String c = "GR23";
-		System.out.println(c.substring(2));
+		String c = "BF";
+		catchEmAll x = new catchEmAll();
+		x.Search(null, c, true);
 	}
 
 }

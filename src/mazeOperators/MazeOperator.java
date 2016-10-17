@@ -16,6 +16,17 @@ public abstract class MazeOperator extends Operator
 
 	public abstract State getNextState(State state);
 
+	public State initNextState(mazeState state, cell cell){
+		if(cell == null){
+			return null;
+		}
+		int pokimonsLeft = getPokimonsLeft(state, cell);
+		boolean[][] pokimons = getPokimons(state,cell);
+		int stepsLeft = getStepsLeft(state);
+		char d = getNextDirection(state.getDirection());
+		return new mazeState(pokimonsLeft,stepsLeft,cell.getCoordinates(),d,pokimons);
+	}
+	
 	public MainEngine getEngine(){
 		return engine;
 	}
