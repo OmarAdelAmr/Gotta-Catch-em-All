@@ -2,6 +2,9 @@ package maze;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import com.sun.corba.se.spi.orbutil.fsm.State;
+
 import catch_em.mazeState;
 
 public class MainEngine 
@@ -66,7 +69,9 @@ public class MainEngine
 				}
 		}
 		//System.out.println(this.player.getPosition()[0] + " , " + this.player.getPosition()[1]);
-		visualize();
+		ArrayList<mazeState> initial = new ArrayList<mazeState>();
+		initial.add(new mazeState(10, 10, new int[] {this.player.getPosition()[0], this.player.getPosition()[1]},'n', maze.pokimonsState));
+		visualize(initial);
 		/*System.out.println();
 		boolean [][]as = theMaze.getPokimonsState();
 		for (int i = 0; i < as[0].length; i++) {
@@ -84,8 +89,9 @@ public class MainEngine
 	}
 	
 	
-	public ArrayList<String> visualize()
+	public ArrayList<String> drawMaze(mazeState state)
 	{
+		
 		ArrayList <String>mazeVisualizer = new ArrayList<String>();
 		int height = this.grid.length; 
 		int width = this.grid[0].length;
@@ -93,7 +99,7 @@ public class MainEngine
 		boolean hasThePlayer = false;
 		boolean hasEndPoint = false;
 		
-		 switch (this.player.getDirection())
+		 switch (state.getDirection())
 		{
 			case 'n': playerDirection = "\u2191"; break;
 			case 's': playerDirection = "\u2193"; break;
@@ -112,8 +118,8 @@ public class MainEngine
 			for (int j = 0; j < height; j++) 
 				{
 					mazeVisualizer.add(this.grid[j][i].west? " ":"\u2502");
-					if (this.grid[j][i].coordinates[0] == this.player.getPosition()[0] &&
-							this.grid[j][i].coordinates[1] == this.player.getPosition()[1])
+					if (this.grid[j][i].coordinates[0] == state.getCurrentPosition()[0] &&
+							this.grid[j][i].coordinates[1] == state.getCurrentPosition()[1])
 					{	
 						hasThePlayer = true;
 					}
@@ -125,7 +131,7 @@ public class MainEngine
 					}
 					
 					
-					if (this.grid[j][i].hasPokimon())
+					if (state.getPokemons()[j][i])
 					{
 						mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + "");	
 						if (hasThePlayer)
@@ -143,7 +149,13 @@ public class MainEngine
 					}
 					else
 					{
-						if (hasEndPoint)
+						if (hasEndPoint && hasThePlayer)
+						{
+								mazeVisualizer.add("\u25A0" + playerDirection);
+								hasThePlayer = false;
+								hasEndPoint = false;
+						}
+						 else if (hasEndPoint)
 						{
 							mazeVisualizer.add("\u25A0" + " ");
 							hasEndPoint = false;
@@ -154,6 +166,7 @@ public class MainEngine
 						//	System.out.println("Player added ");
 							hasThePlayer = false;
 						}
+						
 						else mazeVisualizer.add("  ");
 					}
 					
@@ -173,6 +186,11 @@ public class MainEngine
 			System.out.print(mazeVisualizer.get(i));
 		}
 		return mazeVisualizer;
+	}
+	
+	public void visualize(ArrayList<mazeState> states)
+	{
+		for (int i = 0; i < states.size(); i++) drawMaze(states.get(i));
 	}
 	
 	//control function
@@ -358,6 +376,7 @@ public class MainEngine
 		
 	}
 	
+<<<<<<< HEAD
 	
 //		@SuppressWarnings("unchecked")
 //		public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
@@ -386,6 +405,36 @@ public class MainEngine
 //			}
 //			return actions;
 //		}
+=======
+	/*
+		@SuppressWarnings("unchecked")
+		public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
+		{
+			int x = state.getCurrentPosition()[0];
+			int y = state.getCurrentPosition()[1];
+			char d = state.getDirection();
+			int pokimons = state.getPokemonsLeft();
+			Pair<mazeState, Integer>[] actions = new Pair [4];
+			ArrayList<cell> cells = getPossibleActions(x, y);
+			int [] costs = calculateCost(grid[x][y], d);
+			for (int i = 0; i < costs.length; i++)
+			{
+				if (cells.get(i) != null)
+				{
+					if (cells.get(i).hasPokimon())
+					{
+						int [] newPosition = cells.get(i).coordinates;
+						int newPokimonsLeft = pokimons--;
+						mazeState tmp = new mazeState(newPokimonsLeft, state.getStepsLeft() - 1, 
+														newPosition, getDirection(i));
+						actions[i] =  new Pair<mazeState, Integer>(tmp, costs[i]);
+					}
+	
+				}
+			}
+			return actions;
+		}*/
+>>>>>>> 816030cd60ae6ccf09d282015b7d1d52c00622a1
 		
 		public char getDirection(int i)
 		{
@@ -512,8 +561,5 @@ public class MainEngine
 		
 		}
 	
-
-
-
 }
 

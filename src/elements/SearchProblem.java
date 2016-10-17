@@ -32,7 +32,14 @@ public abstract class SearchProblem
 			Operator operator = i.next();
 
 			State nextState = operator.getNextState(node.getState());
-			int HeuristicCost = heuristicFun.getHeuristicCost(nextState);
+			int HeuristicCost;
+			if (heuristicFun == null)
+			{
+				HeuristicCost = -1;
+			} else
+			{
+				HeuristicCost = heuristicFun.getHeuristicCost(nextState);
+			}
 			SearchNode nextNode = new SearchNode(nextState, node, operator, node.getDepth() + 1,
 					node.getPathCost() + operator.getCost(), HeuristicCost);
 
@@ -56,11 +63,6 @@ public abstract class SearchProblem
 		return stateSpace;
 	}
 
-	public HeuristicFun getHeuristicFun()
-	{
-		return heuristicFun;
-	}
-
 	public void setHeuristicFun(HeuristicFun heuristicFun)
 	{
 		this.heuristicFun = heuristicFun;
@@ -76,9 +78,9 @@ public abstract class SearchProblem
 		this.initialState = initialState;
 	}
 
-	public void setStateSpace(ArrayList<State> stateSpace)
+	public HeuristicFun getHeuristicFun()
 	{
-		this.stateSpace = stateSpace;
+		return heuristicFun;
 	}
 
 }

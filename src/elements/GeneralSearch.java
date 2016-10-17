@@ -13,8 +13,8 @@ import qingFuns.QingFun;
 public class GeneralSearch {
 	
 	public Solution search(SearchProblem searchProblem, QingFun qingFun){
-		Queue<SearchNode> nodes = qingFun.initQueue();
-		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0,0); //TODO
+		Queue<SearchNode> nodes = qingFun.initQueue(); 
+		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0, -1);
 		nodes.add(initNode);
 		
 		while(!nodes.isEmpty()){
@@ -31,7 +31,7 @@ public class GeneralSearch {
 	
 	public Solution depthLimitedSearch(SearchProblem searchProblem, QingFun qingFun, int depth) {
 		Queue<SearchNode> nodes = qingFun.initQueue();
-		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0, 0); //TODO
+		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0, -1);
 		nodes.add(initNode);
 		
 		while(!nodes.isEmpty()){
