@@ -13,6 +13,7 @@ public class MainEngine
 	cell [][] grid;
 	int stepsNeeded;
 	cell endPoint;
+	int numberOfPokimons;
 	
 	// TODO all of these are supposed to be random
 	public MainEngine()
@@ -24,7 +25,7 @@ public class MainEngine
 		Maze theMaze = new Maze (x, y);
 		
 		theMaze.init();
-		
+		this.numberOfPokimons = theMaze.getNumberOfPokimons();
 		this.grid = theMaze.getGrid();	
 		
 		for (int i = 0; i < grid.length; i++) {
