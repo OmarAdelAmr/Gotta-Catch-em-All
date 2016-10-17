@@ -5,19 +5,29 @@ import elements.HeuristicFun;
 import elements.State;
 import maze.MainEngine;
 
-public class thirdHeuriticFun extends MazeHeuristicFun implements HeuristicFun {
-
-	public thirdHeuriticFun(MainEngine engine) {
+public class thirdHeuriticFun extends MazeHeuristicFun implements HeuristicFun
+{
+	// Depends on the distance between the state and nearest pokemon
+	// If equal to zero refer to h1
+	public thirdHeuriticFun(MainEngine engine)
+	{
 		super(engine);
 	}
 
 	@Override
-	public int getHeuristicCost(State state) {
-		mazeState temp = (mazeState) state;
-		// return getEngine().thirdHeuristicFun(/*2le 2nta 3awzo*/);
-		return 0;//TODO
+	public int getHeuristicCost(State state)
+	{
+		mazeState tempState = (mazeState) state;
+		int pokemonsRemainig = tempState.getPokemonsLeft();
+		if (pokemonsRemainig == 0)
+		{
+			int endPointDistance = getEngine().estimateCost(tempState.getCurrentPosition());
+			return endPointDistance;
+		}
+		// TODO WAITING FOR MOAAZ ===> nearstPokemon();
+		int distanceToNearestPokemon = 0;
+		/////////////// END TODO /////////////////
+		return distanceToNearestPokemon;
 	}
-	
-	
 
 }
