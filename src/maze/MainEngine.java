@@ -81,6 +81,11 @@ public class MainEngine
 		}*/
 	
 	}
+	public boolean [][] getPokimonStates()
+	{
+		return maze.pokimonsState;
+	}
+	
 	
 	public ArrayList<String> visualize()
 	{
@@ -355,7 +360,8 @@ public class MainEngine
 		return costs;
 		
 	}
-		
+	
+	
 		@SuppressWarnings("unchecked")
 		public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
 		{
@@ -471,10 +477,10 @@ public class MainEngine
 			int minimum = 250000;
 			for (int i = 0; i < pokimons[0].length; i++) {
 				for (int j = 0; j < pokimons.length; j++) {
-					if (pokimons[j][i])
+					if (pokimons[j][i] && (j != position[0] || i != position[1] ))
 					{
-					int difference  = Math.abs(j - position[0]) + Math.abs(i - position[1]);
-					minimum = difference < minimum? difference: minimum;
+						int difference  = Math.abs(j - position[0]) + Math.abs(i - position[1]);
+						minimum = difference < minimum? difference: minimum;
 					}
 				}
 			}
