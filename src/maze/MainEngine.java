@@ -24,19 +24,7 @@ public class MainEngine
 		maze = theMaze;
 		theMaze.init();
 		this.numberOfPokimons = theMaze.getNumberOfPokimons();
-		this.grid = theMaze.getGrid();	
-		
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
-				cell Cell = grid[i][j];
-				/*System.out.print(Cell.coordinates[0] + " , " + Cell.coordinates[1] + ": " +Cell.north + " " + Cell.east + ' ' + Cell.south + 
-									' ' + Cell.west + " ");*/
-			}
-			
-			//System.out.println();
-		}
-		
-		 
+		this.grid = theMaze.getGrid();	 
 		int posX = (int) (Math.random() * x);
 		int posY = (int) (Math.random() * y);
 		
@@ -66,19 +54,9 @@ public class MainEngine
 				
 				}
 		}
-		//System.out.println(this.player.getPosition()[0] + " , " + this.player.getPosition()[1]);
 		ArrayList<mazeState> initial = new ArrayList<mazeState>();
 		initial.add(new mazeState(10, 10, new int[] {this.player.getPosition()[0], this.player.getPosition()[1]},'n', maze.pokimonsState));
 		visualize(initial);
-		/*System.out.println();
-		boolean [][]as = theMaze.getPokimonsState();
-		for (int i = 0; i < as[0].length; i++) {
-			for (int j = 0; j < as.length; j++) {
-				System.out.print(as[j][i] + " , ");
-
-			}
-			System.out.println();
-		}*/
 	
 	}
 	public boolean [][] getPokimonStates()
@@ -134,14 +112,13 @@ public class MainEngine
 						mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + "");	
 						if (hasThePlayer)
 						{	
-							mazeVisualizer.add(playerDirection);
-						//	System.out.println("Player added ");
 							hasThePlayer = false;
+							mazeVisualizer.add(playerDirection);
 						}
 						else if (hasEndPoint)
 						{
-							mazeVisualizer.add("\u25A0");
 							hasEndPoint = false;
+							mazeVisualizer.add("\u25A0");
 						}
 						else mazeVisualizer.add(" ");
 					}
@@ -149,9 +126,9 @@ public class MainEngine
 					{
 						if (hasEndPoint && hasThePlayer)
 						{
-								mazeVisualizer.add("\u25A0" + playerDirection);
 								hasThePlayer = false;
 								hasEndPoint = false;
+								mazeVisualizer.add("\u25A0" + playerDirection);
 						}
 						 else if (hasEndPoint)
 						{
@@ -191,49 +168,7 @@ public class MainEngine
 		for (int i = 0; i < states.size(); i++) drawMaze(states.get(i));
 	}
 	
-	//control function
-	
-	public void rotateRight()
-	{
-		player.rotateRight();
-	}
-	
-	public void rotateLeft()
-	{
-		player.rotateLeft();
-	}
-	
-	public void step()
-	{
-		char d = player.getDirection();
-		ArrayList<cell> actions = this.getPossibleActions(player.getPosition()[0], player.getPosition()[1]);
-		if (d == 'n' && actions.get(0) == null) System.out.println("Cannot go north!");
-		else if (d == 's' && actions.get(1) == null) System.out.println("Cannot go south!");
-		else if (d == 'e' && actions.get(2) == null) System.out.println("Cannot go east!");
-		else if (d == 'w' && actions.get(3) == null) System.out.println("Cannot go west!");
-		else 
-			{
-			player.step();
-			player.setSteps(player.getSteps() + 1);
-			cell PositionCell = grid[player.getPosition()[0]][player.getPosition()[1]];
-			if (PositionCell.hasPokimon())
-			{
-				player.addPokimon(PositionCell.getPokimon());
-				PositionCell.setHasPokimon(false);
-				PositionCell.setPokimon("");
-			}
-			if (!player.eggHatched())
-			{
-				stepsNeeded--;
-				if (stepsNeeded == 0)
-				{
-					System.out.println("Mabrook ksbt m3ana Pikatchu lel");
-					player.setEggHatched(true);
-				}
-			}
-			}
-	}
-	
+
 	
 	public ArrayList<cell> getPossibleActions(int x, int y)
 	{
@@ -404,6 +339,41 @@ public class MainEngine
 //			return actions;
 //		}
 
+	//control function
+	
+
+	/*
+	public void step()
+	{
+		char d = player.getDirection();
+		ArrayList<cell> actions = this.getPossibleActions(player.getPosition()[0], player.getPosition()[1]);
+		if (d == 'n' && actions.get(0) == null) System.out.println("Cannot go north!");
+		else if (d == 's' && actions.get(1) == null) System.out.println("Cannot go south!");
+		else if (d == 'e' && actions.get(2) == null) System.out.println("Cannot go east!");
+		else if (d == 'w' && actions.get(3) == null) System.out.println("Cannot go west!");
+		else 
+			{
+			player.step();
+			player.setSteps(player.getSteps() + 1);
+			cell PositionCell = grid[player.getPosition()[0]][player.getPosition()[1]];
+			if (PositionCell.hasPokimon())
+			{
+				player.addPokimon(PositionCell.getPokimon());
+				PositionCell.setHasPokimon(false);
+				PositionCell.setPokimon("");
+			}
+			if (!player.eggHatched())
+			{
+				stepsNeeded--;
+				if (stepsNeeded == 0)
+				{
+					System.out.println("Mabrook ksbt m3ana Pikatchu lel");
+					player.setEggHatched(true);
+				}
+			}
+			}
+	}
+	*/
 
 		
 		public char getDirection(int i)
