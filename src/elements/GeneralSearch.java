@@ -11,7 +11,10 @@ import qingFuns.OrderedInsert;
 import qingFuns.QingFun;
 
 public class GeneralSearch {
-	
+	int nodesVisited;
+	public GeneralSearch(){
+		nodesVisited = 0;
+	}
 	public Solution search(SearchProblem searchProblem, QingFun qingFun){
 		Queue<SearchNode> nodes = qingFun.initQueue(); 
 		SearchNode initNode = new SearchNode(searchProblem.getInitialState(), null, null, 0, 0, -1);
@@ -19,13 +22,14 @@ public class GeneralSearch {
 		
 		while(!nodes.isEmpty()){
 			SearchNode node = nodes.remove();
+			nodesVisited++;
 			if(searchProblem.goalTest(node.getState())){
-				return Solution.success(node);
+				return Solution.success(node, nodesVisited);
 			}
 			nodes = qingFun.expand(nodes, searchProblem.expand(node));
 		}
 		
-		return Solution.fail();
+		return Solution.fail(nodesVisited);
 				
 	}
 	
@@ -36,8 +40,9 @@ public class GeneralSearch {
 		
 		while(!nodes.isEmpty()){
 			SearchNode node = nodes.remove();
+			nodesVisited++;
 			if(searchProblem.goalTest(node.getState())){
-				return Solution.success(node);
+				return Solution.success(node, nodesVisited);
 			}
 			ArrayList<SearchNode> expandedNodes = searchProblem.expand(node);
 			filterExpandedNodesByDepth(expandedNodes, depth);
@@ -45,7 +50,7 @@ public class GeneralSearch {
 				nodes = qingFun.expand(nodes, expandedNodes);
 		}
 		
-		return Solution.fail();
+		return Solution.fail(nodesVisited);
 	}
 	
 	public static void filterExpandedNodesByDepth(ArrayList<SearchNode> expandedNodes, int depth){

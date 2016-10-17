@@ -1,17 +1,21 @@
 package catch_em;
 
+import java.util.ArrayList;
+
 public class SearchSolution
 {
-	// TODO ADD SEQUENCE OF MOVES TO REACH THE GOAL
-
+	
+	private ArrayList<mazeState> path;
 	private int solutionCost;
 	private int numberOfNodesExpanded;
 
-	public SearchSolution(int solutionCost, int numberOfNodesExpanded)
+	public SearchSolution(ArrayList<mazeState> path, int solutionCost, int numberOfNodesExpanded)
 	{
+		this.path = path;
 		this.solutionCost = solutionCost;
 		this.numberOfNodesExpanded = numberOfNodesExpanded;
 	}
+	
 
 	public int getSolutionCost()
 	{
@@ -32,5 +36,6 @@ public class SearchSolution
 	{
 		this.numberOfNodesExpanded = numberOfNodesExpanded;
 	}
+	
 
 }

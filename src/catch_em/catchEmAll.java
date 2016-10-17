@@ -1,9 +1,11 @@
 package catch_em;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import elements.GeneralSearch;
 import elements.Operator;
+import elements.Solution;
 import elements.State;
 import heuristicFuns.FirstHeuristicFun;
 import heuristicFuns.FourthHeuristicFun;
@@ -51,19 +53,21 @@ public class catchEmAll
 	public SearchSolution Search(Maze maze, String strategy, boolean visualize)
 	{
 		GeneralSearch generalSearch = new GeneralSearch();
+		
+		Solution solution = null;
 
 		if (strategy.equals("BF"))
 		{
-			generalSearch.BFS(search_problem);
+			solution = generalSearch.BFS(search_problem);
 		} else if (strategy.equals("DF"))
 		{
-			generalSearch.BFS(search_problem);
+			solution = generalSearch.BFS(search_problem);
 		} else if (strategy.equals("ID"))
 		{
-			generalSearch.IterativeDeepingSearch(search_problem);
+			solution = generalSearch.IterativeDeepingSearch(search_problem);
 		} else if (strategy.equals("UC"))
 		{
-			generalSearch.UniformCostSearch(search_problem);
+			solution = generalSearch.UniformCostSearch(search_problem);
 		} else
 		{
 			try
@@ -85,10 +89,10 @@ public class catchEmAll
 				}
 				if (strategy.startsWith("GR"))
 				{
-					generalSearch.greedySearch(search_problem);
+					solution = generalSearch.greedySearch(search_problem);
 				} else if (strategy.startsWith("AS"))
 				{
-					generalSearch.AStarSearch(search_problem);
+					solution = generalSearch.AStarSearch(search_problem);
 				}
 			} catch (Exception e)
 			{
@@ -98,7 +102,13 @@ public class catchEmAll
 		}
 
 		// TODO ADD RETURN VALUE HERE
-		return null;
+		ArrayList<mazeState> path = new ArrayList<mazeState>();
+		Iterator<mazeState> i = path.iterator();
+		while(i.hasNext()){
+			path.add((mazeState)i.next());
+		}
+		
+		return new SearchSolution(path, solution.getPathCost(), solution.getNodesVisited());
 	}
 
 	public static void main(String[] args)
