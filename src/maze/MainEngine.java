@@ -3,8 +3,6 @@ package maze;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sun.corba.se.spi.orbutil.fsm.State;
-
 import catch_em.mazeState;
 
 public class MainEngine 
@@ -387,7 +385,7 @@ public class MainEngine
 //			int pokimons = state.getPokemonsLeft();
 //			Pair<mazeState, Integer>[] actions = new Pair [4];
 //			ArrayList<cell> cells = getPossibleActions(x, y);
-//			int [] costs = calculateCost(grid[x][y], d);
+//			int [] costs = calcula teCost(grid[x][y], d);
 //			for (int i = 0; i < costs.length; i++)
 //			{
 //				if (cells.get(i) != null)
