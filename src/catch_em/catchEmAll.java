@@ -53,7 +53,7 @@ public class catchEmAll
 	public SearchSolution Search(Maze maze, String strategy, boolean visualize)
 	{
 		GeneralSearch generalSearch = new GeneralSearch();
-		
+
 		Solution solution = null;
 
 		if (strategy.equals("BF"))
@@ -80,11 +80,15 @@ public class catchEmAll
 					break;
 				case 2:
 					search_problem.setHeuristicFun(new SecondHeuristicFun(maze_engine));
+					break;
 				case 3:
 					search_problem.setHeuristicFun(new thirdHeuriticFun(maze_engine));
+					break;
 				case 4:
 					search_problem.setHeuristicFun(new FourthHeuristicFun(maze_engine));
+					break;
 				default:
+					System.out.println("Heuristic Not Available");
 					break;
 				}
 				if (strategy.startsWith("GR"))
@@ -104,10 +108,11 @@ public class catchEmAll
 		// TODO ADD RETURN VALUE HERE
 		ArrayList<mazeState> path = new ArrayList<mazeState>();
 		Iterator<mazeState> i = path.iterator();
-		while(i.hasNext()){
-			path.add((mazeState)i.next());
+		while (i.hasNext())
+		{
+			path.add((mazeState) i.next());
 		}
-		
+
 		return new SearchSolution(path, solution.getPathCost(), solution.getNodesVisited());
 	}
 
