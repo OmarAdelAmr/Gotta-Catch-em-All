@@ -15,9 +15,10 @@ public class MoveBackwardOperator extends MazeOperator {
 		mazeState temp = (mazeState) state;
 		cell nextCell =  getEngine().moveBackward(temp.getCurrentPosition(),temp.getDirection());
 		int pokimonsLeft = getPokimonsLeft(temp, nextCell);
+		boolean[][] pokimons = getPokimons(temp,nextCell);
 		int stepsLeft = getStepsLeft(temp);
 		char d = getNextDirection(temp.getDirection());
-		return new mazeState(pokimonsLeft,stepsLeft,nextCell.getCoordinates(),d);
+		return new mazeState(pokimonsLeft,stepsLeft,nextCell.getCoordinates(),d,pokimons);
 	}
 	
 	public char getNextDirection(char d){
