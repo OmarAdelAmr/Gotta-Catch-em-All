@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import catch_em.mazeState;
-import elements.State;
 
 public class MainEngine 
 {
@@ -15,7 +14,6 @@ public class MainEngine
 	cell endPoint;
 	int numberOfPokimons;
 	
-	// TODO all of these are supposed to be random
 	public MainEngine()
 	{
 		int x = (int) (5 + Math.random() * 25);
@@ -38,12 +36,20 @@ public class MainEngine
 			System.out.println();
 		}
 		
-		
-		
-		
-		endPoint = theMaze.getEndPoint();
+		 
 		int posX = (int) (Math.random() * x);
 		int posY = (int) (Math.random() * y);
+		
+		while (true)
+		{
+			int tmpX = (int) (Math.random() * x);
+			int tmpY = (int) (Math.random() * y);
+			if (tmpX != posX || tmpY != posY)
+			{
+				endPoint = grid[tmpX][tmpY];
+				break;	
+			}
+		}
 		
 		boolean found = false;
 		char directorC = ' ';
@@ -71,18 +77,19 @@ public class MainEngine
 		int width = this.grid[0].length;
 		String playerDirection = "";
 		boolean hasThePlayer = false;
+		boolean hasEndPoint = false;
+		
 		 switch (this.player.getDirection())
 		{
-		case 'n': playerDirection = "\u2191"; break;
-		case 's': playerDirection = "\u2193"; break;
-		case 'e': playerDirection = "\u2192"; break;
-		case 'w': playerDirection = "\u2190"; break;
+			case 'n': playerDirection = "\u2191"; break;
+			case 's': playerDirection = "\u2193"; break;
+			case 'e': playerDirection = "\u2192"; break;
+			case 'w': playerDirection = "\u2190"; break;
 		}
 		for (int i = 0; i < width; i++) 
 		{
 			for (int j = 0; j < height; j++)
 			{
-				
 				mazeVisualizer.add("+");
 				mazeVisualizer.add(this.grid[j][i].north?"  ":"\u2500\u2500");
 			}
@@ -90,43 +97,52 @@ public class MainEngine
 			mazeVisualizer.add("\n");
 			for (int j = 0; j < height; j++) 
 				{
-				mazeVisualizer.add(this.grid[j][i].west? " ":"\u2502");
-				if (this.grid[j][i].coordinates[0] == this.player.getPosition()[0] &&
-						this.grid[j][i].coordinates[1] == this.player.getPosition()[1])
-				{	
-					hasThePlayer = true;
-				}
-				if (this.grid[j][i].hasPokimon())
-				{
-					
-					mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + "");	
-					if (hasThePlayer)
+					mazeVisualizer.add(this.grid[j][i].west? " ":"\u2502");
+					if (this.grid[j][i].coordinates[0] == this.player.getPosition()[0] &&
+							this.grid[j][i].coordinates[1] == this.player.getPosition()[1])
 					{	
-					mazeVisualizer.add(playerDirection);
-					System.out.println("Player added ");
-					hasThePlayer = false;
+						hasThePlayer = true;
 					}
 					
-					else mazeVisualizer.add(" ");
-						
-					
-				}
-				else
-				{
-					if (hasThePlayer)
+					if (this.grid[j][i].coordinates[0] == this.endPoint.coordinates[0] &&
+							this.grid[j][i].coordinates[1] == this.endPoint.coordinates[1])
 					{
-						mazeVisualizer.add(playerDirection + " ");
-						System.out.println("Player added ");
-
-						hasThePlayer = false;
+						hasEndPoint = true;
+					}
+					
+					
+					if (this.grid[j][i].hasPokimon())
+					{
+						mazeVisualizer.add(this.grid[j][i].getPokimon().charAt(0) + "");	
+						if (hasThePlayer)
+						{	
+							mazeVisualizer.add(playerDirection);
+							System.out.println("Player added ");
+							hasThePlayer = false;
+						}
+						else if (hasEndPoint)
+						{
+							mazeVisualizer.add("\u25A0");
+							hasEndPoint = false;
+						}
+						else mazeVisualizer.add(" ");
 					}
 					else
+					{
+						if (hasEndPoint)
 						{
-						mazeVisualizer.add("  ");
+							mazeVisualizer.add("\u25A0" + " ");
+							hasEndPoint = false;
 						}
+						else if (hasThePlayer)
+						{
+							mazeVisualizer.add(playerDirection + " ");
+							System.out.println("Player added ");
+							hasThePlayer = false;
+						}
+						else mazeVisualizer.add("  ");
+					}
 					
-				}
-				
 				}
 			
 			mazeVisualizer.add("\u2502");		
@@ -366,10 +382,6 @@ public class MainEngine
 		return false;
 	}
 	
-	public void queryCell(mazeState state)
-	{
-		System.out.println("3el2 Â¯\\_(ãƒ„)_//Â¯");
-	}
 	
 	public char changeDirectionRight(char d)
 	{
@@ -439,7 +451,7 @@ public class MainEngine
 	public static void main(String[] args) {
 	MainEngine z = new MainEngine();
 	
-	
+	System.out.println(z.endPoint.coordinates[0] + " , " + z.endPoint.coordinates[1]);
 	/*for (int i = 0; i < 30; i++) {
 		for (int j = 0; j < 30; j++) {
 			System.out.print(i + " , " + j+": " +z.grid[i][j].north + "," +z.grid[i][j].south+"," +z.grid[i][j].east + "," +z.grid[i][j].west +",");
