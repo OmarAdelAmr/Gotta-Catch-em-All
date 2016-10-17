@@ -2,9 +2,6 @@ package maze;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import catch_em.mazeState;
 
 public class MainEngine 
@@ -18,8 +15,8 @@ public class MainEngine
 	Maze maze;
 	public MainEngine()
 	{
-		int x = (int) (5 + Math.random() * 1);
-		int y = (int) (5 + Math.random() * 1);
+		int x = (int) (5 + Math.random() * 25);
+		int y = (int) (5 + Math.random() * 25);
 		this.stepsNeeded = (int) (5 + (Math.random() *(x * y - 4)));
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
@@ -35,7 +32,7 @@ public class MainEngine
 									' ' + Cell.west + " ");*/
 			}
 			
-			System.out.println();
+			//System.out.println();
 		}
 		
 		 
