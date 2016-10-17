@@ -3,6 +3,8 @@ package maze;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import catch_em.mazeState;
 
 public class MainEngine 
@@ -13,15 +15,15 @@ public class MainEngine
 	int stepsNeeded;
 	cell endPoint;
 	int numberOfPokimons;
-	
+	Maze maze;
 	public MainEngine()
 	{
-		int x = (int) (5 + Math.random() * 25);
-		int y = (int) (5 + Math.random() * 25);
+		int x = (int) (5 + Math.random() * 1);
+		int y = (int) (5 + Math.random() * 1);
 		this.stepsNeeded = (int) (5 + (Math.random() *(x * y - 4)));
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
-		
+		maze = theMaze;
 		theMaze.init();
 		this.numberOfPokimons = theMaze.getNumberOfPokimons();
 		this.grid = theMaze.getGrid();	
@@ -29,8 +31,8 @@ public class MainEngine
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				cell Cell = grid[i][j];
-				System.out.print(Cell.coordinates[0] + " , " + Cell.coordinates[1] + ": " +Cell.north + " " + Cell.east + ' ' + Cell.south + 
-									' ' + Cell.west + " ");
+				/*System.out.print(Cell.coordinates[0] + " , " + Cell.coordinates[1] + ": " +Cell.north + " " + Cell.east + ' ' + Cell.south + 
+									' ' + Cell.west + " ");*/
 			}
 			
 			System.out.println();
@@ -66,8 +68,18 @@ public class MainEngine
 				
 				}
 		}
-		System.out.println(this.player.getPosition()[0] + " , " + this.player.getPosition()[1]);
+		//System.out.println(this.player.getPosition()[0] + " , " + this.player.getPosition()[1]);
 		visualize();
+		/*System.out.println();
+		boolean [][]as = theMaze.getPokimonsState();
+		for (int i = 0; i < as[0].length; i++) {
+			for (int j = 0; j < as.length; j++) {
+				System.out.print(as[j][i] + " , ");
+
+			}
+			System.out.println();
+		}*/
+	
 	}
 	
 	public ArrayList<String> visualize()
@@ -117,7 +129,7 @@ public class MainEngine
 						if (hasThePlayer)
 						{	
 							mazeVisualizer.add(playerDirection);
-							System.out.println("Player added ");
+						//	System.out.println("Player added ");
 							hasThePlayer = false;
 						}
 						else if (hasEndPoint)
@@ -137,7 +149,7 @@ public class MainEngine
 						else if (hasThePlayer)
 						{
 							mazeVisualizer.add(playerDirection + " ");
-							System.out.println("Player added ");
+						//	System.out.println("Player added ");
 							hasThePlayer = false;
 						}
 						else mazeVisualizer.add("  ");
@@ -343,145 +355,160 @@ public class MainEngine
 		return costs;
 		
 	}
-	
-	@SuppressWarnings("unchecked")
-	public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
-	{
-		int x = state.getCurrentPosition()[0];
-		int y = state.getCurrentPosition()[1];
-		char d = state.getDirection();
-		int pokimons = state.getPokemonsLeft();
-		Pair<mazeState, Integer>[] actions = new Pair [4];
-		ArrayList<cell> cells = getPossibleActions(x, y);
-		int [] costs = calculateCost(grid[x][y], d);
-		for (int i = 0; i < costs.length; i++)
+		
+		@SuppressWarnings("unchecked")
+		public Pair <mazeState, Integer>[] actionsWithCost(mazeState state)
 		{
-			if (cells.get(i) != null)
+			int x = state.getCurrentPosition()[0];
+			int y = state.getCurrentPosition()[1];
+			char d = state.getDirection();
+			int pokimons = state.getPokemonsLeft();
+			Pair<mazeState, Integer>[] actions = new Pair [4];
+			ArrayList<cell> cells = getPossibleActions(x, y);
+			int [] costs = calculateCost(grid[x][y], d);
+			for (int i = 0; i < costs.length; i++)
 			{
-				if (cells.get(i).hasPokimon())
+				if (cells.get(i) != null)
 				{
-					int [] newPosition = cells.get(i).coordinates;
-					int newPokimonsLeft = pokimons--;
-					mazeState tmp = new mazeState(newPokimonsLeft, state.getStepsLeft() - 1, 
-													newPosition, getDirection(i));
-					actions[i] =  new Pair<mazeState, Integer>(tmp, costs[i]);
-				}
-
-			}
-		}
-		return actions;
-	}
+					if (cells.get(i).hasPokimon())
+					{
+						int [] newPosition = cells.get(i).coordinates;
+						int newPokimonsLeft = pokimons--;
+						mazeState tmp = new mazeState(newPokimonsLeft, state.getStepsLeft() - 1, 
+														newPosition, getDirection(i));
+						actions[i] =  new Pair<mazeState, Integer>(tmp, costs[i]);
+					}
 	
-	public char getDirection(int i)
-	{
-		if (i == 0) return 'n';
-		if (i == 1) return 's';
-		if (i == 2) return 'e';
-		return 'w';
-	}
-	
-	public boolean isEndPoint(int [] cell)
-	{
-		if (cell[0] == endPoint.coordinates[0] &&
-				cell[1] == endPoint.coordinates[1])
-			return true;
-		return false;
-	}
-	
-	
-	public char changeDirectionRight(char d)
-	{
-		switch(d)
-		{
-		 case 'n': return 'e'; 
-		 case 'e': return 's'; 
-		 case 's': return 'w'; 
-		 case 'w': return 'n'; 
-		}	
-		return ' ';
-	}
-	
-	public char changeDirectionLeft(char d)
-	{
-		switch(d)
-		{
-		 case 'n': return 'w'; 
-		 case 'e': return 'n'; 
-		 case 's': return 'e'; 
-		 case 'w': return 's'; 
-		}	
-		return ' ';
-	}
-	
-	
-	public Player getPlayer()
-	{
-		return player;
-	}
-	
-	public int getNumberOfPokemons()
-	{
-		int result = 0;
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++)
-			{
-				if(grid[i][j].hasPokimon())
-				{
-					result++;
 				}
 			}
+			return actions;
 		}
-		return result;
-	}
-	
-	public int getStepsNeeded()
-	{
-		return stepsNeeded;
-	}
-	
-	public void setStepsNeeded(int stepsNeeded)
-	{
-		this.stepsNeeded = stepsNeeded;
-	}
-	
-	public cell getEndPoint()
-	{
-		return endPoint;
-	}
-	
-	public void setEndPoint(cell endPoint)
-	{
-		this.endPoint = endPoint;
-	}
-	
-	public static void main(String[] args) {
-	MainEngine z = new MainEngine();
-	
-	System.out.println(z.endPoint.coordinates[0] + " , " + z.endPoint.coordinates[1]);
-	System.out.println(z.estimateCost(new int [] {0,0}));
-	/*for (int i = 0; i < 30; i++) {
-		for (int j = 0; j < 30; j++) {
-			System.out.print(i + " , " + j+": " +z.grid[i][j].north + "," +z.grid[i][j].south+"," +z.grid[i][j].east + "," +z.grid[i][j].west +",");
-			
-		}
-		System.out.println();
-	}*/
-	
-		/*for (int j = 0; j < z.grid.length; j++) 
+		
+		public char getDirection(int i)
 		{
-			
-			for (int j2 = 0; j2 < z.grid[0].length; j2++) {
-				System.out.print("+──");
+			if (i == 0) return 'n';
+			if (i == 1) return 's';
+			if (i == 2) return 'e';
+			return 'w';
+		}
+		
+		public boolean isEndPoint(int [] cell)
+		{
+			if (cell[0] == endPoint.coordinates[0] &&
+					cell[1] == endPoint.coordinates[1])
+				return true;
+			return false;
+		}
+		
+		
+		public char changeDirectionRight(char d)
+		{
+			switch(d)
+			{
+			 case 'n': return 'e'; 
+			 case 'e': return 's'; 
+			 case 's': return 'w'; 
+			 case 'w': return 'n'; 
+			}	
+			return ' ';
+		}
+		
+		public char changeDirectionLeft(char d)
+		{
+			switch(d)
+			{
+			 case 'n': return 'w'; 
+			 case 'e': return 'n'; 
+			 case 's': return 'e'; 
+			 case 'w': return 's'; 
+			}	
+			return ' ';
+		}
+		
+		
+		public Player getPlayer()
+		{
+			return player;
+		}
+		
+		public int getNumberOfPokemons()
+		{
+			int result = 0;
+			for (int i = 0; i < grid.length; i++) {
+				for (int j = 0; j < grid[0].length; j++)
+				{
+					if(grid[i][j].hasPokimon())
+					{
+						result++;
+					}
+				}
 			}
-			System.out.println();
-			for (int j2 = 0; j2 < z.grid[0].length; j2++) {
-				System.out.print("\u2502  ");
+			return result;
+		}
+		
+		public int getStepsNeeded()
+		{
+			return stepsNeeded;
+		}
+		
+		public void setStepsNeeded(int stepsNeeded)
+		{
+			this.stepsNeeded = stepsNeeded;
+		}
+		
+		public cell getEndPoint()
+		{
+			return endPoint;
+		}
+		
+		public void setEndPoint(cell endPoint)
+		{
+			this.endPoint = endPoint;
+		}
+		
+		public int nearestPokimon(int [] position, boolean [][] pokimons)
+		{
+			int minimum = 250000;
+			for (int i = 0; i < pokimons[0].length; i++) {
+				for (int j = 0; j < pokimons.length; j++) {
+					if (pokimons[j][i])
+					{
+					int difference  = Math.abs(j - position[0]) + Math.abs(i - position[1]);
+					minimum = difference < minimum? difference: minimum;
+					}
+				}
+			}
+			return minimum;
+		}
+		
+		public static void main(String[] args) {
+		MainEngine z = new MainEngine();
+		
+	//	System.out.println(z.endPoint.coordinates[0] + " , " + z.endPoint.coordinates[1]);
+		System.out.println(z.nearestPokimon(new int[]{0,0}, z.maze.getPokimonsState()));
+		/*for (int i = 0; i < 30; i++) {
+			for (int j = 0; j < 30; j++) {
+				System.out.print(i + " , " + j+": " +z.grid[i][j].north + "," +z.grid[i][j].south+"," +z.grid[i][j].east + "," +z.grid[i][j].west +",");
+				
 			}
 			System.out.println();
 		}*/
+		
+			/*for (int j = 0; j < z.grid.length; j++) 
+			{
+				
+				for (int j2 = 0; j2 < z.grid[0].length; j2++) {
+					System.out.print("+──");
+				}
+				System.out.println();
+				for (int j2 = 0; j2 < z.grid[0].length; j2++) {
+					System.out.print("\u2502  ");
+				}
+				System.out.println();
+			}*/
+		
+		}
 	
-	}
-
 
 
 

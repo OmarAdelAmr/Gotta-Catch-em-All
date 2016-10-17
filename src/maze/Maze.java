@@ -9,13 +9,14 @@ public class Maze
 	private cell [][] grid;	
 	private Stack<cell> stack;
 	private int numberOfPokimons;
-
+	boolean [][] pokimonsState;
 	
 	public Maze(int x, int y)
 	{
 		grid  = new cell [x][y];
 		stack = new Stack<cell>();
 		numberOfPokimons = 0;
+		pokimonsState = new boolean [x][y];
 	}
 	
 	public cell[][] getGrid()
@@ -33,6 +34,12 @@ public class Maze
 		this.numberOfPokimons = n;
 	}
 	
+	public boolean [][] getPokimonsState()
+	{
+		return pokimonsState;
+	}
+	
+	
 	
 	public void init()
 	{
@@ -41,7 +48,11 @@ public class Maze
 			{
 				int [] index = {i, j};
 				cell newCell = new cell(false, false, false, false, index);
-				this.numberOfPokimons = newCell.hasPokimon()? numberOfPokimons+=1: numberOfPokimons;
+				if(newCell.hasPokimon())
+					{
+						pokimonsState[i][j] = true;
+						numberOfPokimons++;
+					}
 				grid[i][j] =  newCell;
 			}
 		}
@@ -53,17 +64,17 @@ public class Maze
 	public void makeMaze(int x, int y)
 	{
 		cell Cell = grid[x][y];
-		System.out.println("Function Called on cell: " + x + " , " + y);
+	//	System.out.println("Function Called on cell: " + x + " , " + y);
 
 		if (Cell.visited)
 		{
-			System.out.println("Yes it is visited");
+			//System.out.println("Yes it is visited");
 			stack.pop();
 			cell next = stack.pop();
 			next.visited = false;		
 			if (!stack.isEmpty())
 				{
-				System.out.println("Cell is taken out of stack! " + next.coordinates[0] +  " , " + next.coordinates[1]);
+			//	System.out.println("Cell is taken out of stack! " + next.coordinates[0] +  " , " + next.coordinates[1]);
 
 				makeMaze(next.coordinates[0], next.coordinates[1]);	
 
@@ -74,7 +85,7 @@ public class Maze
 		stack.push(Cell);
 		ArrayList<cell> neighbours = getNeighbours(Cell);
 		for (int i = 0; i < neighbours.size(); i++) {
-			System.out.println("This cell neighbours are: " + neighbours.get(i).coordinates[0] + " , " + neighbours.get(i).coordinates[1]);
+			//System.out.println("This cell neighbours are: " + neighbours.get(i).coordinates[0] + " , " + neighbours.get(i).coordinates[1]);
 		}
 		Collections.shuffle(neighbours);
 		boolean found = false;
@@ -82,7 +93,7 @@ public class Maze
 			cell neighbourCell = neighbours.get(i);
 			if (!neighbourCell.visited)
 			{
-			System.out.println("Cell " + neighbourCell.coordinates[0] + " , " + neighbourCell.coordinates[1] + " has been chosen");
+			//System.out.println("Cell " + neighbourCell.coordinates[0] + " , " + neighbourCell.coordinates[1] + " has been chosen");
 			found = true;
 			char direction = getDirection(Cell.coordinates[0], Cell.coordinates[1],
 											neighbourCell.coordinates[0], neighbourCell.coordinates[1]);		
@@ -111,11 +122,11 @@ public class Maze
 					neighbourCell.west = true;
 					x++;
 				}
-				System.out.println(direction);
+				//System.out.println(direction);
 			}
 			
 		}	
-		System.out.println("End of function --------- calling on " + x + " , " + y);
+	//	System.out.println("End of function --------- calling on " + x + " , " + y);
 		makeMaze(x, y); 
 		
 	}
@@ -141,7 +152,13 @@ public class Maze
 		Maze Maze = new Maze(4,3);
 		Maze.init();
 		System.out.println(Maze.getNumberOfPokimons());
-		
+		boolean [][] x = Maze.getPokimonsState();
+		for (int i = 0; i < x[0].length; i++) {
+			for (int j = 0; j < x.length; j++)
+			{
+				System.out.println(x[j][i]);
+			}
+		}
 	
 	}
 }
