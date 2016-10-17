@@ -105,7 +105,6 @@ public class catchEmAll
 
 		}
 
-		// TODO ADD RETURN VALUE HERE
 		ArrayList<mazeState> path = new ArrayList<mazeState>();
 		Iterator<mazeState> i = path.iterator();
 		while (i.hasNext())
