@@ -30,6 +30,14 @@ public class MainEngine
 		int posX = (int) (Math.random() * x);
 		int posY = (int) (Math.random() * y);
 		
+		while(grid[posX][posY].hasPokimon())
+		{
+			 posX = (int) (Math.random() * x);
+			 posY = (int) (Math.random() * y);
+		}
+
+		
+		
 		while (true)
 		{
 			int tmpX = (int) (Math.random() * x);
