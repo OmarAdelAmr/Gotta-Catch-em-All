@@ -30,6 +30,14 @@ public class MainEngine
 		int posX = (int) (Math.random() * x);
 		int posY = (int) (Math.random() * y);
 		
+		while(grid[posX][posY].hasPokimon())
+		{
+			 posX = (int) (Math.random() * x);
+			 posY = (int) (Math.random() * y);
+		}
+
+		
+		
 		while (true)
 		{
 			int tmpX = (int) (Math.random() * x);
@@ -57,7 +65,7 @@ public class MainEngine
 				}
 		}
 		ArrayList<mazeState> initial = new ArrayList<mazeState>();
-		initial.add(new mazeState(10, 10, new int[] {this.player.getPosition()[0], this.player.getPosition()[1]},'n', maze.pokimonsState));
+		initial.add(new mazeState(10, 10, new int[] {this.player.getPosition()[0], this.player.getPosition()[1]},player.getDirection(), maze.pokimonsState));
 		visualize(initial);
 	
 	}
