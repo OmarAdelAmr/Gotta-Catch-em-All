@@ -37,5 +37,9 @@ public class SearchSolution
 		this.numberOfNodesExpanded = numberOfNodesExpanded;
 	}
 	
+	public String toString(){
+		return "path = "+path+" solutionCost = "+solutionCost+" numberOfNodesExpanded = "+numberOfNodesExpanded;
+	}
+	
 
 }
