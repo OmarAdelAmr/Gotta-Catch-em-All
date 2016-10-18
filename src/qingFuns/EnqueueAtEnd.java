@@ -1,6 +1,7 @@
 package qingFuns;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -10,7 +11,7 @@ public class EnqueueAtEnd implements QingFun {
 
 	@Override
 	public Queue<SearchNode> initQueue() {
-		return new PriorityQueue<SearchNode>();
+		return new LinkedList<SearchNode>();
 	}
 	
 	@Override
