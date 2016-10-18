@@ -104,9 +104,15 @@ public class catchEmAll
 			}
 
 		}
-
+		if(!solution.isSuccess())
+			try {
+				throw new Exception("failed 3aaaaaaaaa");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		ArrayList<mazeState> path = new ArrayList<mazeState>();
-		Iterator<mazeState> i = path.iterator();
+		Iterator<State> i = solution.getPath().iterator();
 		while (i.hasNext())
 		{
 			path.add((mazeState) i.next());
@@ -119,7 +125,7 @@ public class catchEmAll
 	{
 		String c = "BF";
 		catchEmAll x = new catchEmAll();
-		x.Search(null, c, true);
+		System.out.println(x.Search(null, c, true));
 	}
 
 }
