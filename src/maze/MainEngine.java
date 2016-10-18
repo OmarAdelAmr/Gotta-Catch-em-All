@@ -19,8 +19,8 @@ public class MainEngine
 		int x = (int) (5 + Math.random() * 25);
 		int y = (int) (5 + Math.random() * 25);
 		this.stepsNeeded = 5;
-		x = 2;
-		y = 2;
+		x = 5;
+		y = 5;
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
 		maze = theMaze;
@@ -57,7 +57,7 @@ public class MainEngine
 				}
 		}
 		ArrayList<mazeState> initial = new ArrayList<mazeState>();
-		initial.add(new mazeState(10, 10, new int[] {this.player.getPosition()[0], this.player.getPosition()[1]},'n', maze.pokimonsState));
+		initial.add(new mazeState(10, 10, new int[] {this.player.getPosition()[0], this.player.getPosition()[1]} ,this.player.getDirection() , maze.pokimonsState));
 		visualize(initial);
 	
 	}
