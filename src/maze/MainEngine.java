@@ -18,7 +18,9 @@ public class MainEngine
 	{
 		int x = (int) (5 + Math.random() * 25);
 		int y = (int) (5 + Math.random() * 25);
-		this.stepsNeeded = (int) (5 + (Math.random() *(x * y - 4)));
+		this.stepsNeeded = 5;
+		x = 2;
+		y = 2;
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
 		maze = theMaze;
@@ -472,34 +474,6 @@ public class MainEngine
 			}
 			return minimum;
 		}
-		
-		public static void main(String[] args) {
-		MainEngine z = new MainEngine();
-		
-	//	System.out.println(z.endPoint.coordinates[0] + " , " + z.endPoint.coordinates[1]);
-		System.out.println(z.nearestPokimon(new int[]{0,0}, z.maze.getPokimonsState()));
-		/*for (int i = 0; i < 30; i++) {
-			for (int j = 0; j < 30; j++) {
-				System.out.print(i + " , " + j+": " +z.grid[i][j].north + "," +z.grid[i][j].south+"," +z.grid[i][j].east + "," +z.grid[i][j].west +",");
-				
-			}
-			System.out.println();
-		}*/
-		
-			/*for (int j = 0; j < z.grid.length; j++) 
-			{
-				
-				for (int j2 = 0; j2 < z.grid[0].length; j2++) {
-					System.out.print("+──");
-				}
-				System.out.println();
-				for (int j2 = 0; j2 < z.grid[0].length; j2++) {
-					System.out.print("\u2502  ");
-				}
-				System.out.println();
-			}*/
-		
-		}
-	
+			
 }
 

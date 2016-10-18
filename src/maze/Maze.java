@@ -148,17 +148,4 @@ public class Maze
 		if (x < grid.length - 1) neighbours.add(grid[x + 1][y]); 
 		return neighbours;
 	}
-	public static void main(String[] args) {
-		Maze Maze = new Maze(4,3);
-		Maze.init();
-		System.out.println(Maze.getNumberOfPokimons());
-		boolean [][] x = Maze.getPokimonsState();
-		for (int i = 0; i < x[0].length; i++) {
-			for (int j = 0; j < x[0].length; j++)
-			{
-				System.out.println(x[j][i]);
-			}
-		}
-	
-	}
 }
