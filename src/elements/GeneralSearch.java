@@ -12,8 +12,10 @@ import qingFuns.QingFun;
 
 public class GeneralSearch {
 	int nodesVisited;
+	ArrayList<State> visitedStates;
 	public GeneralSearch(){
 		nodesVisited = 0;
+		visitedStates = new ArrayList<>();
 	}
 	public Solution search(SearchProblem searchProblem, QingFun qingFun){
 		Queue<SearchNode> nodes = qingFun.initQueue(); 
@@ -22,11 +24,17 @@ public class GeneralSearch {
 		
 		while(!nodes.isEmpty()){
 			SearchNode node = nodes.remove();
-			nodesVisited++;
-			if(searchProblem.goalTest(node.getState())){
-				return Solution.success(node, nodesVisited);
+			if(!visitedStates.contains(node.getState())){
+				visitedStates.add(node.getState());
+				nodesVisited++;
+				System.out.println(nodes.size());
+				if(searchProblem.goalTest(node.getState())){
+					return Solution.success(node, nodesVisited);
+				}
+				ArrayList<SearchNode> expandedNodes = searchProblem.expand(node);
+				//filterExpandedNodesByVisitedStates(expandedNodes);
+				nodes = qingFun.expand(nodes, expandedNodes);
 			}
-			nodes = qingFun.expand(nodes, searchProblem.expand(node));
 		}
 		
 		return Solution.fail(nodesVisited);
@@ -46,11 +54,23 @@ public class GeneralSearch {
 			}
 			ArrayList<SearchNode> expandedNodes = searchProblem.expand(node);
 			filterExpandedNodesByDepth(expandedNodes, depth);
+			filterExpandedNodesByVisitedStates(expandedNodes);
 			if(!expandedNodes.isEmpty())
 				nodes = qingFun.expand(nodes, expandedNodes);
 		}
 		
 		return Solution.fail(nodesVisited);
+	}
+	
+	public void filterExpandedNodesByVisitedStates(ArrayList<SearchNode> expandedNodes){
+		ArrayList<SearchNode> filteredNodes = new ArrayList<>();
+		Iterator<SearchNode> i = expandedNodes.iterator();
+		while(i.hasNext()){
+			SearchNode currentNode = i.next();
+			if(!visitedStates.contains(currentNode.getState()))
+				filteredNodes.add(currentNode);
+		}
+		expandedNodes = filteredNodes;
 	}
 	
 	public static void filterExpandedNodesByDepth(ArrayList<SearchNode> expandedNodes, int depth){
