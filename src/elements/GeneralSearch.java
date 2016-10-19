@@ -27,12 +27,11 @@ public class GeneralSearch {
 			if(!visitedStates.contains(node.getState())){
 				visitedStates.add(node.getState());
 				nodesVisited++;
-				System.out.println(nodes.size());
 				if(searchProblem.goalTest(node.getState())){
 					return Solution.success(node, nodesVisited);
 				}
 				ArrayList<SearchNode> expandedNodes = searchProblem.expand(node);
-				//filterExpandedNodesByVisitedStates(expandedNodes);
+				//expandedNodes = filterExpandedNodesByVisitedStates(expandedNodes);
 				nodes = qingFun.expand(nodes, expandedNodes);
 			}
 		}
@@ -48,21 +47,24 @@ public class GeneralSearch {
 		
 		while(!nodes.isEmpty()){
 			SearchNode node = nodes.remove();
-			nodesVisited++;
-			if(searchProblem.goalTest(node.getState())){
-				return Solution.success(node, nodesVisited);
+			if(!visitedStates.contains(node.getState())){
+				visitedStates.add(node.getState());
+				nodesVisited++;
+				if(searchProblem.goalTest(node.getState())){
+					return Solution.success(node, nodesVisited);
+				}
+				ArrayList<SearchNode> expandedNodes = searchProblem.expand(node);
+				expandedNodes = filterExpandedNodesByDepth(expandedNodes, depth);
+				//expandedNodes = filterExpandedNodesByVisitedStates(expandedNodes);
+				if(!expandedNodes.isEmpty())
+					nodes = qingFun.expand(nodes, expandedNodes);
 			}
-			ArrayList<SearchNode> expandedNodes = searchProblem.expand(node);
-			filterExpandedNodesByDepth(expandedNodes, depth);
-			filterExpandedNodesByVisitedStates(expandedNodes);
-			if(!expandedNodes.isEmpty())
-				nodes = qingFun.expand(nodes, expandedNodes);
 		}
-		
+		visitedStates.clear();
 		return Solution.fail(nodesVisited);
 	}
 	
-	public void filterExpandedNodesByVisitedStates(ArrayList<SearchNode> expandedNodes){
+	public ArrayList<SearchNode> filterExpandedNodesByVisitedStates(ArrayList<SearchNode> expandedNodes){
 		ArrayList<SearchNode> filteredNodes = new ArrayList<>();
 		Iterator<SearchNode> i = expandedNodes.iterator();
 		while(i.hasNext()){
@@ -70,10 +72,10 @@ public class GeneralSearch {
 			if(!visitedStates.contains(currentNode.getState()))
 				filteredNodes.add(currentNode);
 		}
-		expandedNodes = filteredNodes;
+		return filteredNodes;
 	}
 	
-	public static void filterExpandedNodesByDepth(ArrayList<SearchNode> expandedNodes, int depth){
+	public static ArrayList<SearchNode> filterExpandedNodesByDepth(ArrayList<SearchNode> expandedNodes, int depth){
 		ArrayList<SearchNode> filteredNodes = new ArrayList<>();
 		Iterator<SearchNode> i = expandedNodes.iterator();
 		while(i.hasNext()){
@@ -81,7 +83,7 @@ public class GeneralSearch {
 			if(currentNode.getDepth()<=depth)
 				filteredNodes.add(currentNode);
 		}
-		expandedNodes = filteredNodes;
+		return filteredNodes;
 	}
 	
 	public Solution BFS(SearchProblem searchProblem){
@@ -125,7 +127,7 @@ public class GeneralSearch {
 
 			@Override
 			public int compare(SearchNode n1, SearchNode n2) {
-				return (n1.getPredictedCost()+n1.getPathCost())-(n2.getPredictedCost()+n1.getPathCost());
+				return (n1.getPredictedCost()+n1.getPathCost())-(n2.getPredictedCost()+n2.getPathCost());
 			}
 			
 		};

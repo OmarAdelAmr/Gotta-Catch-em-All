@@ -1,7 +1,9 @@
 package catch_em;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 
 import elements.GeneralSearch;
 import elements.Operator;
@@ -44,6 +46,7 @@ public class catchEmAll
 		operators.add(new MoveLeftOperator(2, maze_engine));
 		operators.add(new MoveRightOperator(2, maze_engine));
 		operators.add(new MoveBackwardOperator(3, maze_engine));
+		Collections.shuffle(operators, new Random(System.nanoTime()));
 		cell endPoint = maze_engine.getEndPoint();
 
 		search_problem = new mazeSearchProblem(operators, initState, stateSpace, endPoint, null);
@@ -123,9 +126,21 @@ public class catchEmAll
 
 	public static void main(String[] args)
 	{
-		String c = "BF";
+		String c = "ID";
 		catchEmAll x = new catchEmAll();
+		System.out.println();
+		long startTime = System.currentTimeMillis();
+//		System.out.println(x.Search(null, "BF", true));
+//		System.out.println("Total execution time: " + (System.currentTimeMillis() - startTime) );
+//		startTime = System.currentTimeMillis();
+//		System.out.println(x.Search(null, "DF", true));
+//		System.out.println("Total execution time: " + (System.currentTimeMillis() - startTime) );
+//		startTime = System.currentTimeMillis();
+//		System.out.println(x.Search(null, "UC", true));
+//		System.out.println("Total execution time: " + (System.currentTimeMillis() - startTime) );
+		startTime = System.currentTimeMillis();
 		System.out.println(x.Search(null, c, true));
+		System.out.println("Total execution time: " + (System.currentTimeMillis() - startTime) );
 	}
 
 }

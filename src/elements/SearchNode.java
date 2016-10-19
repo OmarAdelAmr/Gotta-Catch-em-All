@@ -36,5 +36,8 @@ public class SearchNode {
 	public int getPredictedCost(){
 		return predictedCost;
 	}
+	public String toString(){
+		return "{cost = "+pathCost+"}";
+	}
 	
 }

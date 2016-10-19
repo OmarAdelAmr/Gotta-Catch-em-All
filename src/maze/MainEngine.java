@@ -16,11 +16,9 @@ public class MainEngine
 	Maze maze;
 	public MainEngine()
 	{
-		int x = (int) (5 + Math.random() * 25);
-		int y = (int) (5 + Math.random() * 25);
-		this.stepsNeeded = 5;
-		x = 5;
-		y = 5;
+		int x = (int) (3 + Math.random() * 5);
+		int y = (int) (3 + Math.random() * 5);
+		this.stepsNeeded = (int) (3 + (Math.random() *(x * y - 4)));
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
 		maze = theMaze;

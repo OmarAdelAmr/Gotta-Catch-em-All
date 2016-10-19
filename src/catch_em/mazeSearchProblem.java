@@ -23,7 +23,6 @@ public class mazeSearchProblem extends SearchProblem
 	{
 		if (state instanceof mazeState)
 		{
-			System.out.println("goal test: "+ state);
 			mazeState tempState = (mazeState) state;
 			if (tempState.getPokemonsLeft() == 0 && tempState.getStepsLeft() == 0
 					&& tempState.getCurrentPosition()[0] == endPoint.getCoordinates()[0]
