@@ -120,7 +120,9 @@ public class catchEmAll
 		{
 			path.add((mazeState) i.next());
 		}
-
+		if(visualize)
+			maze_engine.visualize(path);
+		
 		return new SearchSolution(path, solution.getPathCost(), solution.getNodesVisited());
 	}
 
