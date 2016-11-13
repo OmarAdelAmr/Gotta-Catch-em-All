@@ -2,7 +2,7 @@ package maze;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+import java.io.PrintWriter;
 import catch_em.mazeState;
 
 public class MainEngine 
@@ -479,6 +479,54 @@ public class MainEngine
 				}
 			}
 			return minimum;
+		}
+		
+		public static void main(String[] args) 
+		{
+			
+			MainEngine x = new MainEngine();
+			System.out.println();
+			ArrayList<String> knowledgeBase = new ArrayList<String>();
+			cell [][] grid = x.maze.getGrid();
+			for (int i = 0; i < grid.length; i++) {
+				
+				for (int j = 0; j < grid[i].length; j++) {
+					cell cell = grid[i][j];
+					System.out.println("cell(" + i + "," + j + "," + cell.north +","+ cell.south +","+ cell.east +","+ cell.west + ").");
+					knowledgeBase.add("cell(" + i + "," + j + "," + cell.north +","+ cell.south +","+ cell.east +","+ cell.west + ").");
+
+		
+				}
+			
+			}
+			for (int i = 0; i < grid.length; i++) {
+				
+				for (int j = 0; j < grid[i].length; j++) {
+					cell cell = grid[i][j];
+
+					if (cell.hasPokimon()){ knowledgeBase.add("hasPokimon(" + i + "," + j + ").");};
+					System.out.println(cell.hasPokimon()? "hasPokimon(" + i + "," + j + ").":"");
+				}
+			
+			}
+			System.out.println("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
+			knowledgeBase.add("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
+			System.out.println("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
+			knowledgeBase.add("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
+			System.out.println("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
+			knowledgeBase.add("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
+			System.out.println("-------------------");
+			
+			try{
+			    PrintWriter writer = new PrintWriter("knowledgeBase.txt", "UTF-8");
+			    for (int i = 0; i < knowledgeBase.size(); i++) {
+					writer.println(knowledgeBase.get(i));
+				}
+			    writer.close();
+			} catch (Exception e) {
+			   System.out.println("fuk awf");
+			}
+			
 		}
 			
 }
