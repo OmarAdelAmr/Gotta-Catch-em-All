@@ -19,6 +19,7 @@ public class MainEngine
 		int x = (int) (3 + Math.random() * 5);
 		int y = (int) (3 + Math.random() * 5);
 		this.stepsNeeded = (int) (3 + (Math.random() *(x * y - 4)));
+		System.out.println(this.stepsNeeded);
 		gameDimensions =  new int[]{x, y}; 
 		Maze theMaze = new Maze (x, y);
 		maze = theMaze;
@@ -515,6 +516,8 @@ public class MainEngine
 			knowledgeBase.add("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			System.out.println("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
 			knowledgeBase.add("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
+			System.out.println("stepsToHatch(" + x.stepsNeeded + ").");
+			knowledgeBase.add("stepsToHatch(" + x.stepsNeeded + ").");
 			System.out.println("-------------------");
 			
 			try{
