@@ -521,7 +521,7 @@ public class MainEngine
 			System.out.println("-------------------");
 			
 			try{
-			    PrintWriter writer = new PrintWriter("knowledgeBase.txt", "UTF-8");
+			    PrintWriter writer = new PrintWriter("knowledgeBase.pl", "UTF-8");
 			    for (int i = 0; i < knowledgeBase.size(); i++) {
 					writer.println(knowledgeBase.get(i));
 				}
