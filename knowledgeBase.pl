@@ -1,3 +1,4 @@
+
 cell(0,0,false,true,false,false).
 cell(0,1,true,false,true,false).
 cell(0,2,false,true,true,false).
@@ -19,7 +20,9 @@ hasPokimon(1,1,s0).
 hasPokimon(1,3,s0).
 hasPokimon(1,4,s0).
 hasPokimon(2,0,s0).
-playerLocation(n,1,0,s0).
+
+playerLocation(n, 0, 0, s0).
+
 startPoint(1,0).
 endPoint(2,4).
 stepsToHatch(12,s0).
