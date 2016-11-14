@@ -505,19 +505,19 @@ public class MainEngine
 				for (int j = 0; j < grid[i].length; j++) {
 					cell cell = grid[i][j];
 
-					if (cell.hasPokimon()){ knowledgeBase.add("hasPokimon(" + i + "," + j + ").");};
-					System.out.println(cell.hasPokimon()? "hasPokimon(" + i + "," + j + ").":"");
+					if (cell.hasPokimon()){ knowledgeBase.add("hasPokimon(" + i + "," + j + ",s0).");};
+					System.out.println(cell.hasPokimon()? "hasPokimon(" + i + "," + j + ",s0).":"");
 				}
 			
 			}
-			System.out.println("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
-			knowledgeBase.add("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
+			System.out.println("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
+			knowledgeBase.add("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
 			System.out.println("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			knowledgeBase.add("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			System.out.println("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
 			knowledgeBase.add("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
-			System.out.println("stepsToHatch(" + x.stepsNeeded + ").");
-			knowledgeBase.add("stepsToHatch(" + x.stepsNeeded + ").");
+			System.out.println("stepsToHatch(" + x.stepsNeeded + ",s0).");
+			knowledgeBase.add("stepsToHatch(" + x.stepsNeeded + ",s0).");
 			System.out.println("-------------------");
 			
 			try{
