@@ -33,8 +33,9 @@ player(Steps, X0, Y0, result(A,S)):- player(Steps1, X1, Y1, S),
                                                   (A = east, Y0 is Y1,  X0 is X1 + 1, Steps is Steps1 + 1, canMove(east, S));
                                                   (A = west, Y0 is Y1,  X0 is X1 - 1, Steps is Steps1 + 1, canMove(west,S))
                                                   ).
-goal(Steps, X0, Y0, S):-  player(Steps, X0, Y0, S), stepsToHatch(E, s0), Steps > E - 1.
+goal(Steps, X0, Y0, S):-  player(Steps, X0, Y0, S), stepsToHatch(E, s0), Steps > E - 1, .
 containsPokimon(X, Y, S):-  hasPokimon(X, Y, S).
+/*
 containsPokimon(X, Y, result(A, S)):- containsPokimon(X, Y, S), player(X1, Y1, S),
                                  (
                                   ( X1 is X, Y1 is Y + 1, (A = north, canMove(north, S)));
@@ -42,7 +43,7 @@ containsPokimon(X, Y, result(A, S)):- containsPokimon(X, Y, S), player(X1, Y1, S
                                   ( X1 is X + 1, Y1 is Y, (A = west, canMove(west, S)));
                                   ( X1 is X - 1, Y1 is Y, (A = east , canMove(east, S)))
                                   ).
-
+   */
 
 /*
 createMovingPlan(X0, Y0, X1, Y1, result(A, S)):-  createMovingPlan(_, _, X1, Y1, S),
