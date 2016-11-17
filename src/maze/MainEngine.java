@@ -510,8 +510,8 @@ public class MainEngine
 				}
 			
 			}
-			System.out.println("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
-			knowledgeBase.add("playerLocation(" + x.player.getDirection() + "," + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
+			System.out.println("playerLocation(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
+			knowledgeBase.add("playerLocation("  + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
 			System.out.println("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			knowledgeBase.add("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			System.out.println("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
