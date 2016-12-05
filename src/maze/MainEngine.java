@@ -500,24 +500,29 @@ public class MainEngine
 				}
 			
 			}
+			int numberOfPokimons = 0;
 			for (int i = 0; i < grid.length; i++) {
 				
 				for (int j = 0; j < grid[i].length; j++) {
 					cell cell = grid[i][j];
 
-					if (cell.hasPokimon()){ knowledgeBase.add("hasPokimon(" + i + "," + j + ",s0).");};
-					System.out.println(cell.hasPokimon()? "hasPokimon(" + i + "," + j + ",s0).":"");
+					if (cell.hasPokimon()){ numberOfPokimons++; knowledgeBase.add("hasPokimon(" + i + "," + j + ").");};
+					System.out.println(cell.hasPokimon()? "hasPokimon(" + i + "," + j + ").":"");
 				}
 			
 			}
+			knowledgeBase.add("hasPokimon(" + -1 + "," + -1 + ").");
+			System.out.println("numberOfPokimons(" + numberOfPokimons + ").");
+			knowledgeBase.add("numberOfPokimons(" + numberOfPokimons + ").");
 			System.out.println("playerLocation(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
 			knowledgeBase.add("playerLocation("  + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ",s0).");
 			System.out.println("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			knowledgeBase.add("startPoint(" + x.player.getPosition()[0] + "," + x.player.getPosition()[1] + ").");
 			System.out.println("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
 			knowledgeBase.add("endPoint(" + x.endPoint.coordinates[0] + "," + x.endPoint.coordinates[1] + ").");
-			System.out.println("stepsToHatch(" + x.stepsNeeded + ",s0).");
-			knowledgeBase.add("stepsToHatch(" + x.stepsNeeded + ",s0).");
+			System.out.println("stepsToHatch(" + x.stepsNeeded + ").");
+			knowledgeBase.add("stepsToHatch(" + x.stepsNeeded + ").");
+			
 			System.out.println("-------------------");
 			
 			try{

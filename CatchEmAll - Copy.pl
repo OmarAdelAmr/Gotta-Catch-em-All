@@ -13,16 +13,16 @@ canMove(west, X, Y):-  hasWest(X, Y).
 location(Steps, X, Y, P, _, s0):- Steps =< 0, P =< 0, playerLocation(X, Y, s0).
 location(Steps, X0, Y0, P, Pokimons,result(A,S)):- ((
                                                   (A = south, canMove(north, X0, Y0), X1 is X0, Y1 is Y0 - 1,
-                                                  Steps1 is Steps - 1, P > 0,hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
+                                                  Steps1 is Steps - 1, hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
                                                   P1 is P - 1,append([[X1, Y1]], Pokimons, Pokimons1));
                                                   (A = north, canMove(south, X0, Y0), X1 is X0,  Y1 is Y0 + 1,
-                                                   Steps1 is Steps - 1, P > 0,hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
+                                                   Steps1 is Steps - 1, hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
                                                   P1 is P - 1, append([[X1, Y1]], Pokimons, Pokimons1));
                                                   (A = west, canMove(east, X0, Y0), Y1 is Y0,  X1 is X0 + 1,
-                                                   Steps1 is Steps - 1, P > 0,hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
+                                                   Steps1 is Steps - 1, hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
                                                   P1 is P - 1, append([[X1, Y1]], Pokimons, Pokimons1));
                                                   (A = east, canMove(west, X0, Y0), Y1 is Y0,  X1 is X0 - 1,
-                                                   Steps1 is Steps - 1, P > 0,hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
+                                                   Steps1 is Steps - 1, hasPokimon(X1, Y1), \+member([X1, Y1], Pokimons),
                                                   P1 is P - 1, append([[X1, Y1]], Pokimons, Pokimons1))
 
                                                   );
